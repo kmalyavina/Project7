@@ -19,14 +19,16 @@ You are encouraged to design the UI based on your experience of using chat room 
 
 
 - login window
-	> set name
-	> set avatar
-	> enter chat
+	- set name
+	- set avatar
+	- enter chat
+	- register (later)
 
 - chat client
-	> list of users
-	> chat window
+	- list of users
+	- chat window
 		- your messages on left
 		- other people's messages on right
-	> 
+	- friendslist (later)
+	- ability to open private chat with other members
 
