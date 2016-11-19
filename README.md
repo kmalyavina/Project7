@@ -22,7 +22,7 @@ You are encouraged to design the UI based on your experience of using chat room 
 	- set name
 	- set avatar
 	- enter chat
-	- register (later)
+	- register
 
 - chat client
 	- list of users
