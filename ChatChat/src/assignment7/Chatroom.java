@@ -36,6 +36,7 @@ public class Chatroom {
 		 * @param m message
 		 * @param time timestamp
 		 */
+		
 		public Message(User s, String m, Timestamp time){
 			sender = s;
 			message = m;

@@ -12,18 +12,6 @@
  */
 
 package assignment7;
-/* Client.java
- * EE422C Project 7 submission by
- * Katya Malyavina
- * ym5356
- * 16465
- * Brian Sutherland
- * bcs2433
- * 16445
- * Slip days used: 0
- * Fall 2016
- * GitHub Repository: https://github.com/kmalyavina/Project7
- */
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -42,20 +30,18 @@ import javafx.stage.Stage;
 public class Client extends Application {
 	
 	public class User{
-		protected String userName;		// username/display name (cannot change)(key)
-		protected String password;		// password for logging in 
-		protected String displayName;		// displayed name (changable)
-		protected Image avatar;
-		protected String IP;				// user's ip address 
+		protected String userName;		// username(cannot change)(key)
+		protected String password;		// password for logging in (changable)
+		protected String displayName;	// displayed name (changable)
+		protected Image avatar;			// icon (changable)
 		protected List<User> friends;	// list of friends
-		protected boolean status;			// online/offline
+		protected boolean status;		// online/offline
 		
 		public User(String name, String pass, String nickname, Image img){
 			userName = name;
 			password = pass;
 			displayName = nickname;
 			avatar = img;
-			//IP = "";
 			friends = new ArrayList<User>();
 			status = true;
 		}
@@ -130,18 +116,22 @@ public class Client extends Application {
         
         // Login ------------------------------------------------------------------------------
         
-        // input username
-        // input password
-        // login
-        // register
+        	// username
+        	// password
+        	// login button
+        	// register button
         
         // Register ---------------------------------------------------------------------------
-        
+        	// icon select button
+        	// username
+        	// nickname
+        	// password
+        	// complete registration button
+        	// cancel button
         
         // Chatroom UI ------------------------------------------------------------------------
-        
-        
-        
+        	// list of users
+        	// chatroom in view/focus
         
         
         
