@@ -13,7 +13,6 @@
 
 package assignment7;
 
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -31,20 +33,18 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
 	public class User{
-		protected String userName;		// username/display name (cannot change)(key)
-		protected String password;		// password for logging in 
-		protected String displayName;		// displayed name (changable)
-		protected Image avatar;
-		protected String IP;				// user's ip address 
+		protected String userName;		// username(cannot change)(key)
+		protected String password;		// password for logging in (changable)
+		protected String displayName;	// displayed name (changable)
+		protected Image avatar;			// icon (changable)
 		protected List<User> friends;	// list of friends
-		protected boolean status;			// online/offline
+		protected boolean status;		// online/offline
 		
 		public User(String name, String pass, String nickname, Image img){
 			userName = name;
 			password = pass;
 			displayName = nickname;
 			avatar = img;
-			//IP = "";
 			friends = new ArrayList<User>();
 			status = true;
 		}
@@ -60,12 +60,22 @@ public class Client extends Application {
 	// *******************************************************************************************
 	private VBox ui; // temp
 	
-	private static TextField username = new TextField();
-	private static PasswordField password = new PasswordField();
-	private static Button login = new Button("Log In");
-	private static Button register = new Button("Register"); // initial register button
-	
-	private TextField nickname = new TextField();
+	@FXML
+	private static TextField username;
+	@FXML
+	private static PasswordField password;
+	@FXML
+	private static Button login;
+	@FXML
+	private static Hyperlink registerLink; // initial register button
+	@FXML
+	private static Hyperlink loginLink;
+	@FXML
+	private static Button register;
+	@FXML	
+	private static TextField nickname = new TextField();
+	@FXML
+	private static Button selectAvatar;
 	//private Image avatar;
 	
 	
@@ -74,6 +84,7 @@ public class Client extends Application {
 	
 	// *******************************************************************************************
 	
+	@FXML
 	private static void login(String uName, String pass){ // when login button is pressed
 		if(ServerMain.users.containsKey(uName)){
 			if(ServerMain.users.get(uName).password == pass){
@@ -116,24 +127,30 @@ public class Client extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		// set up all UI elements
         primaryStage.setTitle("Chat.Chat");
+        Parent loginPage = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
         
         // Login ------------------------------------------------------------------------------
         
-        // input username
-        // input password
-        // login
-        // register
+        	// username
+        	// password
+        	// login button
+        	// register button
         
         // Register ---------------------------------------------------------------------------
-        
+        	// icon select button
+        	// username
+        	// nickname
+        	// password
+        	// complete registration button
+        	// cancel button
         
         // Chatroom UI ------------------------------------------------------------------------
+        	// list of users
+        	// chatroom in view/focus
         
-        
-        
-        
-        
-        
+       
 		Scene scene = new Scene(ui, ui.getPrefWidth(), ui.getPrefHeight());			 
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -26,7 +26,7 @@ import javafx.scene.control.*;
 
 public class ServerMain {
 	
-	protected static Map<String, User> users;
+	protected static Map<String, User> users; // database of users
 	protected static List<Chatroom> rooms; 	// chatroom at index 0 is global chat
 	protected static TextArea info;			// server status info
 	
@@ -45,7 +45,7 @@ public class ServerMain {
 
 
 	public static void main(String[] args){
-		ServerMain mainServer = new ServerMain(); // starts up the server
+		new ServerMain(); // starts up the server
 		users = new HashMap<String, User>();
 		rooms = new ArrayList<Chatroom>();
 		
