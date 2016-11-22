@@ -74,6 +74,8 @@ public class Client extends Application {
 	private static Button register;
 	@FXML	
 	private static TextField nickname = new TextField();
+	@FXML
+	private static Button selectAvatar;
 	//private Image avatar;
 	
 	

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<Pane id="avatarselect" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="avatarselect" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Client">
    <children>
       <GridPane layoutY="32.0" prefHeight="301.0" prefWidth="600.0">
         <columnConstraints>
@@ -41,46 +40,46 @@
             <RadioButton mnemonicParsing="false" toggleGroup="$icons" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/1.png" />
+                  <Image url="@img/1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@icons/2.png" />
+                  <Image url="@img/2.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <image>
-                  <Image url="@icons/6.png" />
+                  <Image url="@img/6.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER">
                <image>
-                  <Image url="@icons/5.png" />
+                  <Image url="@img/5.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@icons/7.png" />
+                  <Image url="@img/7.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <image>
-                  <Image url="@icons/9.png" />
+                  <Image url="@img/9.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <image>
-                  <Image url="@icons/0.png" />
+                  <Image url="@img/0.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <image>
-                  <Image url="@icons/3.png" />
+                  <Image url="@img/3.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
-      <Button layoutX="274.0" layoutY="343.0" mnemonicParsing="false" text="Meow!" />
+      <Button id="selectAvatar" layoutX="274.0" layoutY="343.0" mnemonicParsing="false" text="Meow!" />
    </children>
 </Pane>

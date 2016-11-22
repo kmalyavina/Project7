@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="850.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="850.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Client">
    <children>
       <ImageView id="chatchatIcon" fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
