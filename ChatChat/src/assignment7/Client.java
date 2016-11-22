@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -61,6 +63,7 @@ public class Client extends Application {
 	private static PasswordField password = new PasswordField();
 	private static Button login = new Button("Log In");
 	private static Button register = new Button("Register"); // initial register button
+	private static Button completeRegistration = new Button("Register Meow!");
 	
 	private TextField nickname = new TextField();
 	//private Image avatar;
@@ -113,6 +116,9 @@ public class Client extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		// set up all UI elements
         primaryStage.setTitle("Chat.Chat");
+        Parent loginPage = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
         
         // Login ------------------------------------------------------------------------------
         
@@ -133,8 +139,7 @@ public class Client extends Application {
         	// list of users
         	// chatroom in view/focus
         
-        
-        
+       
 		Scene scene = new Scene(ui, ui.getPrefWidth(), ui.getPrefHeight());			 
         primaryStage.setScene(scene);
         primaryStage.show();

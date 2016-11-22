@@ -19,6 +19,7 @@ import java.util.List;
 import assignment7.Client.User;
 
 public class Chatroom {
+	
 	private List<User> members;
 	private List<Message> messages;
 	//private int index; // like a chatroom id; used in servermain
