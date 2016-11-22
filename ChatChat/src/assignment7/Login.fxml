@@ -12,7 +12,7 @@
    <children>
       <ImageView id="chatchatIcon" fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@icons/icon2.png" />
+            <Image url="@img/icon2.png" />
          </image>
       </ImageView>
       <Button id="login" layoutX="350.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login" />

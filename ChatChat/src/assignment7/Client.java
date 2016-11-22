@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,13 +60,20 @@ public class Client extends Application {
 	// *******************************************************************************************
 	private VBox ui; // temp
 	
-	private static TextField username = new TextField();
-	private static PasswordField password = new PasswordField();
-	private static Button login = new Button("Log In");
-	private static Button register = new Button("Register"); // initial register button
-	private static Button completeRegistration = new Button("Register Meow!");
-	
-	private TextField nickname = new TextField();
+	@FXML
+	private static TextField username;
+	@FXML
+	private static PasswordField password;
+	@FXML
+	private static Button login;
+	@FXML
+	private static Hyperlink registerLink; // initial register button
+	@FXML
+	private static Hyperlink loginLink;
+	@FXML
+	private static Button register;
+	@FXML	
+	private static TextField nickname = new TextField();
 	//private Image avatar;
 	
 	
@@ -74,6 +82,7 @@ public class Client extends Application {
 	
 	// *******************************************************************************************
 	
+	@FXML
 	private static void login(String uName, String pass){ // when login button is pressed
 		if(ServerMain.users.containsKey(uName)){
 			if(ServerMain.users.get(uName).password == pass){
