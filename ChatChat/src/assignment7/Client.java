@@ -12,18 +12,7 @@
  */
 
 package assignment7;
-/* Client.java
- * EE422C Project 7 submission by
- * Katya Malyavina
- * ym5356
- * 16465
- * Brian Sutherland
- * bcs2433
- * 16445
- * Slip days used: 0
- * Fall 2016
- * GitHub Repository: https://github.com/kmalyavina/Project7
- */
+
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,7 +29,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Client extends Application {
-	
+
 	public class User{
 		protected String userName;		// username/display name (cannot change)(key)
 		protected String password;		// password for logging in 
