@@ -24,13 +24,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 public class Client extends Application {
 	
@@ -56,8 +55,6 @@ public class Client extends Application {
 	private static ObjectOutputStream output;
 	private static ObjectInputStream input;
 	private static Socket connection;
-	
-	private Stage stage;
 
 	
 	// ALLLL THE UI STUFF HERE :D
@@ -114,29 +111,25 @@ public class Client extends Application {
 	}
 	
 	@FXML
-	 private void registerSwitch(ActionEvent event) throws Exception {
-		 replaceSceneContent("Register.fxml");
+	 private void handleLinkAction(ActionEvent event) throws IOException{
+	     Stage stage; 
+	     Parent root;
+	     if(event.getSource()==registerLink){
+	        //get reference to the button's stage         
+	        stage=(Stage) registerLink.getScene().getWindow();
+	        //load up OTHER FXML document
+	  root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+	      }
+	     else{
+	       stage=(Stage) loginLink.getScene().getWindow();
+	       root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	      }
+	     //create a new scene with root and set the stage
+	      Scene scene = new Scene(root);
+	      stage.setScene(scene);
+	      stage.show();
 	    }
 	
-	@FXML
-	 private void loginSwitch(ActionEvent event) throws Exception {
-		 replaceSceneContent("Login.fxml");
-	    }
-	
-	private Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(Client.class.getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(page, 700, 450);
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
-    }
-
-
 	private void closeConnection() {
 		try{
 			user.status = false;
@@ -161,7 +154,9 @@ public class Client extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		// set up all UI elements
         primaryStage.setTitle("Chat.Chat");
-
+        Parent loginPage = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
         
         // Login ------------------------------------------------------------------------------
         

@@ -19,6 +19,6 @@
       <TextField id="nickname" layoutX="350.0" layoutY="301.0" promptText="Nickname" />
       <PasswordField id="password" layoutX="350.0" layoutY="334.0" promptText="Password" />
       <Button id="register" layoutX="350.0" layoutY="367.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Register!" />
-      <Hyperlink id="loginLink" layoutX="405.0" layoutY="403.0" onAction="#loginSwitch" text="Login" textAlignment="CENTER" textFill="#727475" />
+      <Hyperlink id="loginLink" layoutX="405.0" layoutY="403.0" onAction="#handleLinkAction" text="Login" textAlignment="CENTER" textFill="#727475" />
    </children>
 </Pane>
