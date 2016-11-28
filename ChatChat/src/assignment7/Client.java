@@ -22,12 +22,15 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -52,136 +55,83 @@ public class Client extends Application {
 		}
 	}
 
-	private static User user;
-	private static ObjectOutputStream toServer = null;
-	private static ObjectInputStream fromServer = null;
-
-	
-	// ALLLL THE UI STUFF HERE :D
-	// *******************************************************************************************
-	@FXML
-	private static ImageView chatchatIcon;
-	@FXML
-	private static TextField username;
-	@FXML
-	private static PasswordField password;	// pressing enter in this field = trigger login button action
-	@FXML
-	private static Button loginButton;
-	@FXML
-	private static Hyperlink registerLink; 
-	@FXML
-	private static Hyperlink loginLink;
-	@FXML
-	private static Button registerButton;
-	@FXML	
-	private static TextField nickname;
-	@FXML
-	private static Button selectAvatar;
-
-	
-	
-	//private TextField userText; // chat text
-	
-	
-	// *******************************************************************************************
-	
-	@FXML
-	private static void login(){ // when login button is pressed
-		String uName = username.getText();
-		String pass = password.getText();
-		if(ServerMain.users.containsKey(uName)){				// check if the usernamee exists in list of users
-			if(ServerMain.users.get(uName).password == pass){	// check if pass matches username
-				user = ServerMain.users.get(uName);
-				
-			}
-			else {
-				// your password is incorrect! 
-				// clear fields
-				//username.setText("");
-				password.setText("");
-			}
-		}
-		else {
-			// there is no user with this name! Register?
-		}
-	}
-	
-	@FXML
-	 private void handleLinkAction(ActionEvent event) throws IOException{
-	     Stage stage; 
-	     Parent root;
-	     if(event.getSource() == registerLink){
-	        stage = (Stage) registerLink.getScene().getWindow();
-	        root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7\\Register.fxml"));
-	      }
-	     else{
-	       stage = (Stage) loginLink.getScene().getWindow();
-	       root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7\\Login.fxml"));
-	      }
-
-	     Scene scene = new Scene(root);
-	     stage.setScene(scene);
-	     stage.show();
-	    }
-	
-	private void closeConnection() {
-		try{
-			user.status = false;
-			ServerMain.info.appendText(user.userName + " has disconnected from the server. \n");
-			fromServer.close();
-			toServer.close();
-		}catch(IOException ioException){ ioException.printStackTrace(); }
-	}
-
-	
-	public static void main(String[] args) { launch(args); }
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Chat.Chat");
-        Parent loginPage = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7\\Login.fxml"));
-        
-//        registerLink.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent e) {
-//    	        try {
-//        	        Stage stage = (Stage) registerLink.getScene().getWindow();
-//					Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7\\Register.fxml"));
-//				    Scene scene = new Scene(root);
-//				    stage.setScene(scene);
-//				    stage.show();
-//				} catch (IOException e1) {e1.printStackTrace();}        
-//            }
-//        });
-//        
-//        loginLink.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent e) {
-//    	        try {
-//        	        Stage stage = (Stage) loginLink.getScene().getWindow();
-//					Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7\\Login.fxml"));
-//				    Scene scene = new Scene(root);
-//				    stage.setScene(scene);
-//				    stage.show();
-//				} catch (IOException e1) {e1.printStackTrace();}        
-//            }
-//        });
-       
-        try {
-	        Socket socket = new Socket("127.0.0.1", 8000);
-	        fromServer = new ObjectInputStream(socket.getInputStream());
-	        toServer = new ObjectOutputStream(socket.getOutputStream());
-        } catch (Exception e){
-        	System.out.println(e);
-        	System.out.println("Can't Connect");
-        } 
-       
-		Scene scene = new Scene(loginPage,850,560);			 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+		private User user;
+		private static ObjectOutputStream toServer = null;
+		private static ObjectInputStream fromServer = null;
 		
-	}
+	    @FXML
+	    private Hyperlink registerLink;
+	    @FXML
+	    private Hyperlink loginLink;
+	    @FXML
+	    private TextField username;
+	    @FXML
+	    private PasswordField password;
+	    @FXML
+	    private Button loginButton;
+	    @FXML 
+	    private Button registerButton;
+	    @FXML
+	    private TextField nickname;
+	    @FXML
+	    private Label error;
+	    @FXML
+	    private Button selectAvatar;
+	    @FXML
+	    private ImageView chatchatIcon;
+	    
+	    
+	    @FXML
+	    private void handleLinkAction(ActionEvent event) throws IOException{
+	        Stage stage = null; 
+	        Parent root = null;
+	        if(event.getSource()==registerLink){
+	           //get reference to the button's stage         
+	           stage=(Stage) registerLink.getScene().getWindow();
+	           //load up OTHER FXML document
+	           root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+	         }
+	        if(event.getSource()==loginLink){ 
+	          stage=(Stage) loginLink.getScene().getWindow();
+	          root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	         }
+	        //create a new scene with root and set the stage
+	         Scene scene = new Scene(root);
+	         stage.setScene(scene);
+	         stage.show();
+	       }
+	    
+	    @FXML
+	    private void handleButtonAction(ActionEvent event) throws IOException{
+	        if(event.getSource() == registerButton){
+	           // do registration stuff
+	        	System.out.println("I registered!!!!!");
+	         }
+	        if(event.getSource() == loginButton){ 
+	          // do login stuff
+	        	System.out.println("I logged in~~~~");
+	         }
+	       }
+	    
+		public static void main(String[] args) { launch(args); }
+		
+		@Override
+		public void start(Stage primaryStage) throws Exception{
+			primaryStage.setTitle("Chat.Chat");
+	        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 	
-	
+	        try {
+		        Socket socket = new Socket("127.0.0.1", 8000);
+		        fromServer = new ObjectInputStream(socket.getInputStream());
+		        toServer = new ObjectOutputStream(socket.getOutputStream());
+	        } catch (Exception e){
+	        	System.out.println(e);
+	        	System.out.println("Can't Connect");
+	        } 
+	        
+			Scene scene = new Scene(root);			 
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
+			
+		}
 }
-
