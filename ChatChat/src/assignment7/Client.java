@@ -95,8 +95,10 @@ public class Client extends Application {
 			if(ServerMain.users.get(uName).password == pass){	// check if pass matches username
 				user = ServerMain.users.get(uName);
 				try {
-					connect(); 									// establish a connection to server  
-				} catch (IOException e) { e.printStackTrace(); }
+					output = new ObjectOutputStream(connection.getOutputStream());
+					output.flush();
+					input = new ObjectInputStream(connection.getInputStream());
+					} catch (IOException e) { e.printStackTrace(); }
 			}
 			else {
 				// your password is incorrect! 
@@ -114,20 +116,18 @@ public class Client extends Application {
 	 private void handleLinkAction(ActionEvent event) throws IOException{
 	     Stage stage; 
 	     Parent root;
-	     if(event.getSource()==registerLink){
-	        //get reference to the button's stage         
-	        stage=(Stage) registerLink.getScene().getWindow();
-	        //load up OTHER FXML document
-	  root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+	     if(event.getSource() == registerLink){
+	        stage = (Stage) registerLink.getScene().getWindow();
+	        root = FXMLLoader.load(getClass().getResource("Register.fxml"));
 	      }
 	     else{
-	       stage=(Stage) loginLink.getScene().getWindow();
+	       stage = (Stage) loginLink.getScene().getWindow();
 	       root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 	      }
-	     //create a new scene with root and set the stage
-	      Scene scene = new Scene(root);
-	      stage.setScene(scene);
-	      stage.show();
+
+	     Scene scene = new Scene(root);
+	     stage.setScene(scene);
+	     stage.show();
 	    }
 	
 	private void closeConnection() {
@@ -140,45 +140,19 @@ public class Client extends Application {
 		}catch(IOException ioException){ ioException.printStackTrace(); }
 	}
 
-	private static void connect() throws IOException{
-		connection = ServerMain.server.accept();
-		user.status = true;
-		output = new ObjectOutputStream(connection.getOutputStream());
-		output.flush();
-		input = new ObjectInputStream(connection.getInputStream());
-	}
 	
 	public static void main(String[] args) { launch(args); }
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		// set up all UI elements
         primaryStage.setTitle("Chat.Chat");
         Parent loginPage = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
+        //Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        //Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
         
-        // Login ------------------------------------------------------------------------------
-        
-        	// username
-        	// password
-        	// login button
-        	// register button
-        
-        // Register ---------------------------------------------------------------------------
-        	// icon select button
-        	// username
-        	// nickname
-        	// password
-        	// complete registration button
-        	// cancel button
-        
-        // Chatroom UI ------------------------------------------------------------------------
-        	// list of users
-        	// chatroom in view/focus
-        
-       
-		Scene scene = new Scene(ui, ui.getPrefWidth(), ui.getPrefHeight());			 
+		connection = ServerMain.server.accept();
+		
+		Scene scene = new Scene(loginPage);			 
         primaryStage.setScene(scene);
         primaryStage.show();
 		
