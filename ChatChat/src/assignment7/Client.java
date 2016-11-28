@@ -32,7 +32,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Client extends Application {
-	
+
 	public class User{
 		protected String userName;		// username(cannot change)(key)
 		protected String password;		// password for logging in (changable)
