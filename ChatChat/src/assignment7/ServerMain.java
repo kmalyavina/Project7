@@ -42,13 +42,10 @@ public class ServerMain {
 		} catch (IOException e) { e.printStackTrace(); }
 	}
 	
-
-
 	public static void main(String[] args){
 		new ServerMain(); // starts up the server
 		users = new HashMap<String, User>();
-		rooms = new ArrayList<Chatroom>();
-		
+		rooms = new ArrayList<Chatroom>();	
 	}
 	
 }

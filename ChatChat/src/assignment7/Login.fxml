@@ -10,14 +10,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="850.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Client">
    <children>
-      <ImageView id="chatchatIcon" fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="chatchatIcon" fx:id="chatchatIcon" fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/icon2.png" />
          </image>
       </ImageView>
       <TextField id="username" layoutX="350.0" layoutY="280.0" promptText="Username" />
       <PasswordField id="password" layoutX="350.0" layoutY="318.0" promptText="Password" />
-      <Button id="login" layoutX="350.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login" />
-      <Hyperlink id="registerLink" layoutX="348.0" layoutY="388.0" onAction="#handleLinkAction" text="Need an account? Register!" textAlignment="CENTER" textFill="#727475" />
+      <Button id="loginButton" fx:id="loginButton" layoutX="350.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login" />
+      <Hyperlink id="registerLink" fx:id="registerLink" layoutX="348.0" layoutY="388.0" onAction="#handleLinkAction" text="Need an account? Register!" textAlignment="CENTER" textFill="#727475" />
    </children>
 </Pane>
