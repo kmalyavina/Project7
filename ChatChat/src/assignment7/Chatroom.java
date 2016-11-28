@@ -16,10 +16,17 @@ package assignment7;
 import java.sql.Timestamp;
 import java.util.List;
 
-import assignment7.Client.User;
+//import assignment7.Client.User;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class Chatroom {
-	
+	 // @Override
+
+	/*
 	private List<User> members;
 	private List<Message> messages;
 	//private int index; // like a chatroom id; used in servermain
@@ -28,7 +35,7 @@ public class Chatroom {
 		User sender;
 		String message;
 		Timestamp timestamp;
-		
+		*/
 		/**
 		 * Message constructor
 		 * Called when client presses enter to send a message to a chatroom
@@ -37,12 +44,12 @@ public class Chatroom {
 		 * @param m message
 		 * @param time timestamp
 		 */
-		
+		/*
 		public Message(User s, String m, Timestamp time){
 			sender = s;
 			message = m;
 			timestamp = time;
 		}
 	}	
-	
+	*/
 }
