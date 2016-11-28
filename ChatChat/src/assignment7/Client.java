@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,12 +59,11 @@ public class Client extends Application {
 	
 	// ALLLL THE UI STUFF HERE :D
 	// *******************************************************************************************
-	private VBox ui; // temp
 	
 	@FXML
 	private static TextField username;
 	@FXML
-	private static PasswordField password;
+	private static PasswordField password;	// pressing enter in this field = trigger login button action
 	@FXML
 	private static Button login;
 	@FXML
@@ -76,25 +76,33 @@ public class Client extends Application {
 	private static TextField nickname = new TextField();
 	@FXML
 	private static Button selectAvatar;
-	//private Image avatar;
 	
 	
-	private TextField userText;
+	//private TextField userText; // chat text
 	
 	
 	// *******************************************************************************************
 	
+	//**** Note: maybe we need to establish connection to server when program is opened so client can
+	//**** 		 have access to the user database
 	@FXML
-	private static void login(String uName, String pass){ // when login button is pressed
-		if(ServerMain.users.containsKey(uName)){
-			if(ServerMain.users.get(uName).password == pass){
+	private static void login(){ // when login button is pressed
+		String uName = username.getText();
+		String pass = password.getText();
+		if(ServerMain.users.containsKey(uName)){				// check if the usernamee exists in list of users
+			if(ServerMain.users.get(uName).password == pass){	// check if pass matches username
 				user = ServerMain.users.get(uName);
 				try {
-					connect(); 
-				} catch (IOException e) { e.printStackTrace(); }
+					output = new ObjectOutputStream(connection.getOutputStream());
+					output.flush();
+					input = new ObjectInputStream(connection.getInputStream());
+					} catch (IOException e) { e.printStackTrace(); }
 			}
 			else {
 				// your password is incorrect! 
+				// clear fields
+				//username.setText("");
+				password.setText("");
 			}
 		}
 		else {
@@ -102,8 +110,25 @@ public class Client extends Application {
 		}
 	}
 	
+	@FXML
+	 private void handleLinkAction(ActionEvent event) throws IOException{
+	     Stage stage; 
+	     Parent root;
+	     if(event.getSource() == registerLink){
+	        stage = (Stage) registerLink.getScene().getWindow();
+	        root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+	      }
+	     else{
+	       stage = (Stage) loginLink.getScene().getWindow();
+	       root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	      }
+
+	     Scene scene = new Scene(root);
+	     stage.setScene(scene);
+	     stage.show();
+	    }
+	
 	private void closeConnection() {
-		//System.out.println("Closing connections...");
 		try{
 			user.status = false;
 			ServerMain.info.appendText(user.userName + " has disconnected from the server. \n");
@@ -113,45 +138,19 @@ public class Client extends Application {
 		}catch(IOException ioException){ ioException.printStackTrace(); }
 	}
 
-	private static void connect() throws IOException{
-		connection = ServerMain.server.accept();
-		user.status = true;
-		output = new ObjectOutputStream(connection.getOutputStream());
-		output.flush();
-		input = new ObjectInputStream(connection.getInputStream());
-	}
 	
 	public static void main(String[] args) { launch(args); }
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		// set up all UI elements
         primaryStage.setTitle("Chat.Chat");
         Parent loginPage = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
+        //Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        //Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
         
-        // Login ------------------------------------------------------------------------------
-        
-        	// username
-        	// password
-        	// login button
-        	// register button
-        
-        // Register ---------------------------------------------------------------------------
-        	// icon select button
-        	// username
-        	// nickname
-        	// password
-        	// complete registration button
-        	// cancel button
-        
-        // Chatroom UI ------------------------------------------------------------------------
-        	// list of users
-        	// chatroom in view/focus
-        
-       
-		Scene scene = new Scene(ui, ui.getPrefWidth(), ui.getPrefHeight());			 
+		connection = ServerMain.server.accept();
+		
+		Scene scene = new Scene(loginPage);			 
         primaryStage.setScene(scene);
         primaryStage.show();
 		
