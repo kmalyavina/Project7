@@ -15,9 +15,9 @@
             <Image url="@img/icon2.png" />
          </image>
       </ImageView>
-      <Button id="login" layoutX="350.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login" />
-      <PasswordField id="password" layoutX="350.0" layoutY="318.0" promptText="Password" />
       <TextField id="username" layoutX="350.0" layoutY="280.0" promptText="Username" />
-      <Hyperlink id="registerLink" layoutX="348.0" layoutY="388.0" text="Need an account? Register!" textAlignment="CENTER" textFill="#727475" />
+      <PasswordField id="password" layoutX="350.0" layoutY="318.0" promptText="Password" />
+      <Button id="login" layoutX="350.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login" />
+      <Hyperlink id="registerLink" layoutX="348.0" layoutY="388.0" onAction="#registerSwitch" text="Need an account? Register!" textAlignment="CENTER" textFill="#727475" />
    </children>
 </Pane>

@@ -21,14 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class Client extends Application {
 	
@@ -54,6 +56,8 @@ public class Client extends Application {
 	private static ObjectOutputStream output;
 	private static ObjectInputStream input;
 	private static Socket connection;
+	
+	private Stage stage;
 
 	
 	// ALLLL THE UI STUFF HERE :D
@@ -63,7 +67,7 @@ public class Client extends Application {
 	@FXML
 	private static TextField username;
 	@FXML
-	private static PasswordField password;
+	private static PasswordField password;	// pressing enter in this field = trigger login button action
 	@FXML
 	private static Button login;
 	@FXML
@@ -84,17 +88,24 @@ public class Client extends Application {
 	
 	// *******************************************************************************************
 	
+	//**** Note: maybe we need to establish connection to server when program is opened so client can
+	//**** 		 have access to the user database
 	@FXML
-	private static void login(String uName, String pass){ // when login button is pressed
-		if(ServerMain.users.containsKey(uName)){
-			if(ServerMain.users.get(uName).password == pass){
+	private static void login(){ // when login button is pressed
+		String uName = username.getText();
+		String pass = password.getText();
+		if(ServerMain.users.containsKey(uName)){				// check if the usernamee exists in list of users
+			if(ServerMain.users.get(uName).password == pass){	// check if pass matches username
 				user = ServerMain.users.get(uName);
 				try {
-					connect(); 
+					connect(); 									// establish a connection to server  
 				} catch (IOException e) { e.printStackTrace(); }
 			}
 			else {
 				// your password is incorrect! 
+				// clear fields
+				//username.setText("");
+				password.setText("");
 			}
 		}
 		else {
@@ -102,8 +113,31 @@ public class Client extends Application {
 		}
 	}
 	
+	@FXML
+	 private void registerSwitch(ActionEvent event) throws Exception {
+		 replaceSceneContent("Register.fxml");
+	    }
+	
+	@FXML
+	 private void loginSwitch(ActionEvent event) throws Exception {
+		 replaceSceneContent("Login.fxml");
+	    }
+	
+	private Parent replaceSceneContent(String fxml) throws Exception {
+        Parent page = (Parent) FXMLLoader.load(Client.class.getResource(fxml), null, new JavaFXBuilderFactory());
+        Scene scene = stage.getScene();
+        if (scene == null) {
+            scene = new Scene(page, 700, 450);
+            stage.setScene(scene);
+        } else {
+            stage.getScene().setRoot(page);
+        }
+        stage.sizeToScene();
+        return page;
+    }
+
+
 	private void closeConnection() {
-		//System.out.println("Closing connections...");
 		try{
 			user.status = false;
 			ServerMain.info.appendText(user.userName + " has disconnected from the server. \n");
@@ -127,9 +161,7 @@ public class Client extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		// set up all UI elements
         primaryStage.setTitle("Chat.Chat");
-        Parent loginPage = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Parent registerPage = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        Parent iconSelection = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));
+
         
         // Login ------------------------------------------------------------------------------
         
