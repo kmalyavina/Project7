@@ -34,6 +34,7 @@ public class ServerMain extends Application {
 	
 	private static Map<String, User> allusers = new HashMap<>();
 	ArrayList<String> userList = new ArrayList<String>();
+	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
 
 	
 	/*

@@ -13,6 +13,7 @@
 
 package assignment7;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -36,6 +37,17 @@ public class Chatroom {
 	@FXML	
 	private TextField chatlog;
 	
+	
+	private List<User> members;
+	private List<Message> messages;
+	
+	public void add(Message m){
+		messages.add(m);
+	}
+	
+	public List<Message> getMessages() {
+		return messages;
+	}
 	
 	@FXML
 	private void handleSendAction(ActionEvent event) throws IOException{
@@ -65,31 +77,28 @@ public class Chatroom {
 		}
         
     }
-	 // @Override
 
-	/*
-	private List<User> members;
-	private List<Message> messages;
+
+
+
+}
+
+class Message {
+	User sender;
+	String message;
+	//Timestamp timestamp;
 	
-	public class Message {
-		User sender;
-		String message;
-		Timestamp timestamp;
-		*/
-		/**
-		 * Message constructor
-		 * Called when client presses enter to send a message to a chatroom
-		 * 
-		 * @param s sender
-		 * @param m message
-		 * @param time timestamp
-		 */
-		/*
-		public Message(User s, String m, Timestamp time){
-			sender = s;
-			message = m;
-			timestamp = time;
-		}
-	}	
-	*/
+	/**
+	 * Message constructor
+	 * Called when client presses enter to send a message to a chatroom
+	 * 
+	 * @param s sender
+	 * @param m message
+	 * @param time timestamp
+	 */
+	
+	public Message(User s, String m){
+		sender = s;
+		message = m;
+	}
 }
