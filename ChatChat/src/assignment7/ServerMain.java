@@ -52,7 +52,7 @@ public class ServerMain extends Application {
 			scan = new Scanner (new File("userList.txt"));
 		} catch (FileNotFoundException e) { System.out.println("File not found."); }
 			
-		/*while(scan.hasNext()){
+		while(scan.hasNext()){
 			userList.add(scan.nextLine());
 		}
 		
@@ -73,8 +73,12 @@ public class ServerMain extends Application {
 			while(scan.hasNext()){
 				friends.add(scan.next());
 			}
-			allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
-		}*/
+			//allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
+
+			User auser = new User(username, nickname, password, userIcon, s, friends);
+			System.out.println(auser);
+			allusers.put(username, auser);
+		}
 			
 		return allusers;
 	}

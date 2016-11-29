@@ -97,7 +97,9 @@ public class Client extends Application {
 	        	
 	        	toServer.writeBytes(username.getText()+'\n'); 
 				toServer.flush(); 
-				//fromServer.readInt();
+
+	        	System.out.println("I logged in~~~~");
+
 	         }
 	       }
 	    
@@ -159,5 +161,10 @@ class User{
 		avatar = img;
 		friends = new ArrayList<String>();
 		status = true;
+	}
+	
+	public String toString(){
+		return userName + " - " + displayName + " - " + password + " - " + avatar + " - " + status;
+		
 	}
 }
