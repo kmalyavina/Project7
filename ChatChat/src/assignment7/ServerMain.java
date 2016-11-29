@@ -100,20 +100,28 @@ public class ServerMain extends Application
 				// Create data input and output streams
 				DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
 				DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
+				outputToClient.write(1);
 				// Continuously serve the client
+				int input;
+				String lastInput = null;
 				while (true) { 
 					// Receive radius from the client 
-					double radius = inputFromClient.readDouble();
-
+					//double radius = inputFromClient.readDouble();
+					input = inputFromClient.readInt();
+					int internal = input;
 					// Compute area
-					double area = radius * radius * Math.PI; 
+					//double area = radius * radius * Math.PI; 
 					// Send area back to the client
-					outputToClient.writeDouble(area);
-					Platform.runLater(() -> { 
-						ta.appendText("radius received from client: " +
-								radius + '\n'); 
-						ta.appendText("Area found: " + area + '\n');
-					});
+					//outputToClient.write(1);
+
+					//outputToClient.flush();
+					//if (!input.equals(lastInput)) {
+						Platform.runLater(() -> { 
+						  	ta.appendText("username from client: " +
+								internal + '\n'); 
+						});
+					//}
+					//lastInput = input;
 				}
 			} catch(IOException e) {
 				e.printStackTrace();

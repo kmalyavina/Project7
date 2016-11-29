@@ -109,6 +109,9 @@ public class Client extends Application {
 	         }
 	        if(event.getSource() == loginButton){ 
 	          // do login stuff
+	        	toServer.writeBytes(username.toString()); 
+				toServer.flush(); 
+				fromServer.readInt();
 	        	System.out.println("I logged in~~~~");
 	         }
 	       }
@@ -124,6 +127,7 @@ public class Client extends Application {
 		        Socket socket = new Socket("127.0.0.1", 8000);
 		        fromServer = new ObjectInputStream(socket.getInputStream());
 		        toServer = new ObjectOutputStream(socket.getOutputStream());
+		        toServer.flush();
 	        } catch (Exception e){
 	        	System.out.println(e);
 	        	System.out.println("Can't Connect");
