@@ -16,16 +16,11 @@ package assignment7;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import assignment7.Client.User;
-
-import javafx.scene.control.*;
-import java.io.*;
-import java.net.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -34,8 +29,56 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 
-public class ServerMain extends Application
-{ // Text area for displaying contents 
+public class ServerMain extends Application { 
+	private Scanner scan;
+	
+	private static Map<String, User> allusers = new HashMap<>();
+	ArrayList<String> userList = new ArrayList<String>();
+
+	
+	/*
+	 *  format:
+	 *  	username nickname password icon.png status friend1 friend2 friend3...
+	 * 
+	 * 
+	 */
+	private Map<String, User> buildUsers(){
+		scan = null;
+		
+		try {
+			scan = new Scanner (new File("userList.txt"));
+		} catch (FileNotFoundException e) { System.out.println("File not found."); }
+			
+		while(scan.hasNext()){
+			userList.add(scan.nextLine());
+		}
+		
+		for(int k = 0; k < userList.size(); k++){
+			scan = new Scanner(userList.get(k));
+			String username = scan.next();
+			String nickname = scan.next();
+			String password = scan.next();
+			String userIcon = scan.next();
+			String status = scan.next();
+			Boolean s;
+			if(status == "true")
+				s = true;
+			else
+				s = false;
+			
+			ArrayList<String> friends = new ArrayList<String>();
+			while(scan.hasNext()){
+				friends.add(scan.next());
+			}
+			allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
+		}
+			
+		return allusers;
+	}
+	
+	
+	
+	// Text area for displaying contents 
 	private TextArea ta = new TextArea(); 
 
 	// Number a client 
@@ -43,6 +86,10 @@ public class ServerMain extends Application
 
 	@Override // Override the start method in the Application class 
 	public void start(Stage primaryStage) { 
+		
+		buildUsers();
+
+		
 		// Create a scene and place it in the stage 
 		Scene scene = new Scene(new ScrollPane(ta), 450, 200); 
 		primaryStage.setTitle("MultiThreadServer"); // Set the stage title 
@@ -96,7 +143,7 @@ public class ServerMain extends Application
 		}
 		/** Run a thread */
 		public void run() { 
-			try {
+			try {				
 				// Create data input and output streams
 				DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
 				DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
