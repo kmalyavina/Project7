@@ -13,11 +13,14 @@
 
 package assignment7;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,8 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
 		private User user;
-		private static DataOutputStream toServer = null;
-		private static DataInputStream fromServer = null;
+		private static ObjectOutputStream toServer = null;
+		private static ObjectInputStream fromServer = null;
 		
 	    @FXML
 	    private Hyperlink registerLink;
@@ -95,10 +98,37 @@ public class Client extends Application {
 	          // do login stuff
 	        	System.out.println(username.getText());
 	        	
-	        	toServer.writeBytes(username.getText()+'\n'); 
-				toServer.flush(); 
+	        	//toServer.writeBytes(username.getText()+ ' ' + password.getText() +'\n'); 
+				User me = new User(username.getText(),"", password.getText(), "");
 
-	        	System.out.println("I logged in~~~~");
+	        	toServer.writeObject(me);
+	        	toServer.flush(); 
+				 try {
+					me  = (User) fromServer.readObject();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (me == null) {
+		        	System.out.println("Login failed!");
+
+				} else {
+				     Stage stage=(Stage) loginButton.getScene().getWindow();
+			         Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
+			        /*try {
+						Chatroom.start(stage);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}*/
+			        //create a new scene with root and set the stage
+			        Scene scene = new Scene(root);
+			         stage.setScene(scene);
+			         stage.show();
+					System.out.println("I logged in~~~~");
+
+
+				}
 
 	         }
 	       }
@@ -116,11 +146,12 @@ public class Client extends Application {
 	        try {
 				@SuppressWarnings("resource")
 		        Socket socket = new Socket("127.0.0.1", 8000);
-		       // fromServer = new ObjectInputStream(socket.getInputStream());
-			       // toServer = new ObjectOutputStream(socket.getOutputStream());
+		       fromServer = new ObjectInputStream(socket.getInputStream());
+			       toServer = new ObjectOutputStream(socket.getOutputStream());
 
-				fromServer = new DataInputStream(socket.getInputStream()); 
-				toServer = new DataOutputStream(socket.getOutputStream()); 
+				 //BufferedReader fromServer  = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				//new DataInputStream(socket.getInputStream()); 
+				//toServer = new DataOutputStream(socket.getOutputStream()); 
 
 		        //socket.close();
 		        //toServer.flush();
@@ -135,7 +166,7 @@ public class Client extends Application {
 		}
 }
 
-class User{
+class User implements Serializable{
 	protected String userName;		// username(cannot change)(key)
 	protected String password;		// password for logging in (changable)
 	protected String displayName;	// displayed name (changable)

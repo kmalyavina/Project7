@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1108.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Main">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1108.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Chatroom">
    <children>
       <ImageView id="chatchatIcon" fx:id="chatchatIcon" fitHeight="150.0" fitWidth="150.0" layoutX="918.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>

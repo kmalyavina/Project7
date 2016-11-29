@@ -153,18 +153,40 @@ public class ServerMain extends Application {
 			try {				
 				// Create data input and output streams
 				//DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
-				DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
-				  BufferedReader inputFromClient
-		          = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				ObjectOutputStream outputToClient = new ObjectOutputStream( socket.getOutputStream());
+				 // BufferedReader inputFromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				ObjectInputStream inputFromClient = new ObjectInputStream( socket.getInputStream());
+
 				//outputToClient.write(1);
 				// Continuously serve the client
 				String input;
 				String lastInput = null;
 				while (true) { 
+					//scan = new Scanner(inputFromClient.read);
+					//String username = scan.next();
+					//String password = scan.next();
+					User credentials;
+					try {
+						credentials = (User) inputFromClient.readObject();
+						User currentUser = allusers.get(credentials.userName);
+						if (currentUser != null && currentUser.password.equals(credentials.password)) {
+							System.out.println("Success!");
+							outputToClient.writeObject(currentUser);
+						} else {
+							outputToClient.writeObject(currentUser);
+						}
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//System.out.println("Hoping for password: "+ currentUser.password);
+				
+					
+					outputToClient.flush();
 					// Receive radius from the client 
 					//double radius = inputFromClient.readDouble();
-					input = inputFromClient.readLine();
-					String internal = input;
+					
+					//String internal = input;
 					// Compute area
 					//double area = radius * radius * Math.PI; 
 					// Send area back to the client
@@ -174,7 +196,7 @@ public class ServerMain extends Application {
 					//if (!input.equals(lastInput)) {
 						Platform.runLater(() -> { 
 						  	ta.appendText("username from client: " +
-								internal + '\n'); 
+						  			 '\n'); 
 						});
 					//}
 					//lastInput = input;

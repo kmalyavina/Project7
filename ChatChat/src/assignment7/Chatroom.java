@@ -46,13 +46,13 @@ public class Chatroom {
 			System.out.println(incomingMsg);
 			//String pass = password.getText();
 	 }
-    public void start(Stage stage) throws Exception {
+    public   void start(Stage stage) throws Exception {
     	try {
     		//URL file = getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml");
     		//System.out.println( file.toString() );
     	
-	        Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
 	      //  Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
 
 	        Scene scene = new Scene(root, 300, 275);
 	    
@@ -65,6 +65,7 @@ public class Chatroom {
 		}
         
     }
+   
 	 // @Override
 
 	/*

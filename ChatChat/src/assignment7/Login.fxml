@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       <TextField id="username" fx:id="username" layoutX="350.0" layoutY="280.0" promptText="Username" />
-      <PasswordField id="password" layoutX="350.0" layoutY="318.0" promptText="Password" />
+      <PasswordField id="password" fx:id="password" layoutX="350.0" layoutY="318.0" promptText="Password" />
       <Button id="loginButton" fx:id="loginButton" layoutX="350.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="149.0" text="Login" />
       <Hyperlink id="registerLink" fx:id="registerLink" layoutX="348.0" layoutY="388.0" onAction="#handleLinkAction" text="Need an account? Register!" textAlignment="CENTER" textFill="#727475" />
       <Label id="error" alignment="CENTER" contentDisplay="CENTER" layoutY="422.0" prefHeight="17.0" prefWidth="850.0" textFill="RED" />
