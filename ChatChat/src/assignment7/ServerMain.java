@@ -46,10 +46,13 @@ public class ServerMain extends Application {
 		scan = null;
 		
 		try {
+			//File test = new File("").getAbsoluteFile();
+			
+			//System.out.println(test.toString());
 			scan = new Scanner (new File("userList.txt"));
 		} catch (FileNotFoundException e) { System.out.println("File not found."); }
 			
-		while(scan.hasNext()){
+		/*while(scan.hasNext()){
 			userList.add(scan.nextLine());
 		}
 		
@@ -71,7 +74,7 @@ public class ServerMain extends Application {
 				friends.add(scan.next());
 			}
 			allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
-		}
+		}*/
 			
 		return allusers;
 	}
@@ -145,17 +148,19 @@ public class ServerMain extends Application {
 		public void run() { 
 			try {				
 				// Create data input and output streams
-				DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
+				//DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
 				DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
-				outputToClient.write(1);
+				  BufferedReader inputFromClient
+		          = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				//outputToClient.write(1);
 				// Continuously serve the client
-				int input;
+				String input;
 				String lastInput = null;
 				while (true) { 
 					// Receive radius from the client 
 					//double radius = inputFromClient.readDouble();
-					input = inputFromClient.readInt();
-					int internal = input;
+					input = inputFromClient.readLine();
+					String internal = input;
 					// Compute area
 					//double area = radius * radius * Math.PI; 
 					// Send area back to the client

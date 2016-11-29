@@ -13,6 +13,8 @@
 
 package assignment7;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,8 +40,8 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
 		private User user;
-		private static ObjectOutputStream toServer = null;
-		private static ObjectInputStream fromServer = null;
+		private static DataOutputStream toServer = null;
+		private static DataInputStream fromServer = null;
 		
 	    @FXML
 	    private Hyperlink registerLink;
@@ -91,10 +93,11 @@ public class Client extends Application {
 	         }
 	        if(event.getSource() == loginButton){ 
 	          // do login stuff
-	        	toServer.writeBytes(username.toString()); 
+	        	System.out.println(username.getText());
+	        	
+	        	toServer.writeBytes(username.getText()+'\n'); 
 				toServer.flush(); 
-				fromServer.readInt();
-	        	System.out.println("I logged in~~~~");
+				//fromServer.readInt();
 	         }
 	       }
 	    
@@ -104,20 +107,28 @@ public class Client extends Application {
 		public void start(Stage primaryStage) throws Exception{
 			primaryStage.setTitle("Chat.Chat");
 	        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	    	Scene scene = new Scene(root);			 
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
 	
 	        try {
+				@SuppressWarnings("resource")
 		        Socket socket = new Socket("127.0.0.1", 8000);
-		        fromServer = new ObjectInputStream(socket.getInputStream());
-		        toServer = new ObjectOutputStream(socket.getOutputStream());
-		        toServer.flush();
+		       // fromServer = new ObjectInputStream(socket.getInputStream());
+			       // toServer = new ObjectOutputStream(socket.getOutputStream());
+
+				fromServer = new DataInputStream(socket.getInputStream()); 
+				toServer = new DataOutputStream(socket.getOutputStream()); 
+
+		        //socket.close();
+		        //toServer.flush();
+
 	        } catch (Exception e){
 	        	System.out.println(e);
 	        	System.out.println("Can't Connect");
 	        } 
 	        
-			Scene scene = new Scene(root);			 
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
+		
 			
 		}
 }
