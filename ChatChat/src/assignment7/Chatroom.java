@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -41,7 +42,7 @@ public class Chatroom {
 	@FXML	
 	private Button sendButton;
 	@FXML	
-	private TextField msg;
+	private TextArea usertext;
 	@FXML	
 	private TextField chatlog;
 	
@@ -54,7 +55,7 @@ public class Chatroom {
 		   //  Stage stage; 
 		    // Parent root;
 			
-			String incomingMsg = msg.getText();
+			String incomingMsg = usertext.getText();
 			System.out.println(incomingMsg);
 			//String pass = password.getText();
 	 }

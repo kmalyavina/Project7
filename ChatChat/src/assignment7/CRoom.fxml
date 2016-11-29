@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="850.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="850.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Chatroom">
    <children>
       <AnchorPane prefHeight="580.0" prefWidth="223.0">
          <children>
@@ -65,7 +65,7 @@
                   <Pane prefHeight="103.0" prefWidth="673.0">
                      <children>
                         <TextArea id="usertext" fx:id="usertext" layoutX="67.0" layoutY="33.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.8" prefHeight="25.0" prefWidth="434.0" promptText="Type a meowsage..." wrapText="true" />
-                        <Button id="sendButton" fx:id="sendButton" layoutX="512.0" layoutY="39.0" mnemonicParsing="false" opacity="0.8" prefHeight="23.0" prefWidth="52.0" text="---&gt;" />
+                        <Button id="sendButton" fx:id="sendButton" layoutX="512.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleSendAction" opacity="0.8" prefHeight="23.0" prefWidth="52.0" text="---&gt;" />
                      </children>
                   </Pane>
                </children>

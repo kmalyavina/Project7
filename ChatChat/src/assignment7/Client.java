@@ -181,7 +181,7 @@ public class Client extends Application {
 
 				} else {
 				     Stage stage=(Stage) loginButton.getScene().getWindow();
-			         Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
+			         Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));
 			        /*try {
 						Chatroom.start(stage);
 					} catch (Exception e) {
