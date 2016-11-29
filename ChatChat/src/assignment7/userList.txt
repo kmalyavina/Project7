@@ -1,0 +1,1 @@
+username nickname password icon.png status friend1 friend2 friend3
