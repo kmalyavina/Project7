@@ -160,9 +160,8 @@ public class ServerMain extends Application {
 
 				//outputToClient.write(1);
 				// Continuously serve the client
-				String input;
-				String lastInput = null;
-				while (true) { 
+				boolean logged = false;
+				while (logged == false) { 
 					//scan = new Scanner(inputFromClient.read);
 					//String username = scan.next();
 					//String password = scan.next();
@@ -173,6 +172,7 @@ public class ServerMain extends Application {
 						if (currentUser != null && currentUser.password.equals(credentials.password)) {
 							System.out.println("Success!");
 							outputToClient.writeObject(currentUser);
+							logged = true;
 						} else {
 							outputToClient.writeObject(currentUser);
 						}
@@ -195,12 +195,24 @@ public class ServerMain extends Application {
 
 					//outputToClient.flush();
 					//if (!input.equals(lastInput)) {
-						Platform.runLater(() -> { 
+					/*	Platform.runLater(() -> { 
 						  	ta.appendText("username from client: " +
 						  			 '\n'); 
-						});
+						});*/
 					//}
 					//lastInput = input;
+				}
+				while (true) { 
+					try {
+						String msg = (String) inputFromClient.readObject();
+						System.out.println(msg);
+						ta.appendText(msg +
+					  			 '\n'); 
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 			} catch(IOException e) {
 				e.printStackTrace();
