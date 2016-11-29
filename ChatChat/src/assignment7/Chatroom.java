@@ -30,6 +30,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class Chatroom {
+	
+	private List<User> members;
+	private List<Message> messages;
+	
+	public List<Message> getMessages() {
+		return messages;
+	}
+	
 	@FXML	
 	private Button sendButton;
 	@FXML	
@@ -37,16 +45,8 @@ public class Chatroom {
 	@FXML	
 	private TextField chatlog;
 	
-	
-	private List<User> members;
-	private List<Message> messages;
-	
 	public void add(Message m){
 		messages.add(m);
-	}
-	
-	public List<Message> getMessages() {
-		return messages;
 	}
 	
 	@FXML
@@ -58,13 +58,13 @@ public class Chatroom {
 			System.out.println(incomingMsg);
 			//String pass = password.getText();
 	 }
-    public   void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception {
     	try {
     		//URL file = getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml");
     		//System.out.println( file.toString() );
     	
+	        Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
 	      //  Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
 
 	        Scene scene = new Scene(root, 300, 275);
 	    
@@ -77,6 +77,7 @@ public class Chatroom {
 		}
         
     }
+
 
 
 
