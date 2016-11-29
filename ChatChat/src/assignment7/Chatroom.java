@@ -26,15 +26,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class Chatroom {
 	
 	private List<User> members;
 	private List<Message> messages;
-	
+	private Chatroom currentchat;
+
 	
 	@FXML	
 	private Button sendButton;
@@ -42,6 +47,11 @@ public class Chatroom {
 	private TextArea usertext;
 	@FXML	
 	private TextField chatlog;
+    @FXML
+    private GridPane chatmessages;
+ 
+    @FXML
+    private Label nameLabel;
 	
 	public void add(Message m){ messages.add(m);}
 	
@@ -56,8 +66,56 @@ public class Chatroom {
 			Client.toServer.writeObject(incomingMsg);
 			//String pass = password.getText();
 	 }
+	@FXML
+	private void displayMessages(){ 								// used when switching between chatrooms
+		chatmessages.getChildren().clear();
+		for(int k = 0; k < currentchat.getMessages().size(); k++){
+			Message message = currentchat.getMessages().get(k);		// get the message
+			ImageView icon = new ImageView(message.sender.avatar);	// get the icon
+			TextArea textarea = new TextArea(message.message);					// get the text contents
+			textarea.setEditable(false);
+			
+			textarea.setStyle("-fx-text-fill: #eeeeee;");
+			if (message.sender.equals("fixme")){	
+				textarea.setStyle("-fx-background-color: #353333");
+				textarea.setStyle("-fx-stroke: #A9A9A9");
+				textarea.setStyle("-fx-stroke-width: 1.5");
+				textarea.setStyle("-fx-stroke-dash-array: 18 9 3 9;");
+				textarea.setStyle("-fx-stroke-line-cap: round");
+
+			}
+			else 
+				textarea.setStyle("-fx-background-color: #A9A9A9");
+			
+			HBox m = new HBox(10, icon, textarea);						// put them next to each other    		
+			chatmessages.add(m, k, 2);								// add it to the grid in the scrollbox 
+		}
+	}
+    @FXML
+    private void sendMessage(){ // press enter in usertext or press send button
+    	if(usertext.getText() != ""){
+	    	Message meow = new Message(Client.currentUser, usertext.getText());
+	    	currentchat.add(meow);		// add the message to the current chatroom that's in focus
+	    	
+	    	ImageView icon = new ImageView(Client.currentUser.avatar);	// get the icon
+    		TextArea textarea = new TextArea(usertext.getText());		// get the text contents
+			textarea.setEditable(false);
+			
+			textarea.setStyle("-fx-background-color: #353333");
+			textarea.setStyle("-fx-stroke: #A9A9A9");
+			textarea.setStyle("-fx-stroke-width: 1.5");
+			textarea.setStyle("-fx-stroke-dash-array: 18 9 3 9;");
+			textarea.setStyle("-fx-stroke-line-cap: round");
+    		
+    		
+    		HBox m = new HBox(7, icon, textarea);				// put them next to each other
+	    	chatmessages.add(m, currentchat.getMessages().size(), 2);	    	
+	    	usertext.setText("");
+    	}
+    }
 
 }
+
 
 class Message {
 	User sender;

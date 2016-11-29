@@ -35,6 +35,7 @@ public class ServerMain extends Application {
 	private static Map<String, User> allusers = new HashMap<>();
 	ArrayList<String> userList = new ArrayList<String>();
 	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
+	
 
 	
 	/*
@@ -206,6 +207,7 @@ public class ServerMain extends Application {
 					try {
 						String msg = (String) inputFromClient.readObject();
 						System.out.println(msg);
+						
 						ta.appendText(msg +
 					  			 '\n'); 
 					} catch (ClassNotFoundException e) {
