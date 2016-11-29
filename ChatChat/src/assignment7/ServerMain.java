@@ -35,6 +35,7 @@ public class ServerMain extends Application {
 	private static Map<String, User> allusers = new HashMap<>();
 	ArrayList<String> userList = new ArrayList<String>();
 	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
+	
 
 	private Map<String, User> buildUsers(){
 		scan = null;
@@ -198,8 +199,7 @@ public class ServerMain extends Application {
 					try {						
 						String msg = (String) inputFromClient.readObject();
 						System.out.println(credentials.userName + ": "+ msg);
-						ta.appendText(credentials.userName + ": "+ msg +
-					  			 '\n'); 
+						ta.appendText(credentials.userName + ": "+ msg + '\n'); 
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
