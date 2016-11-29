@@ -83,7 +83,8 @@ public class Client extends Application {
 	    private TextArea usertext;
 	    @FXML
 	    private Button sendButton;
-	   
+	    @FXML
+	    private Label nameLabel;
 	    
 	    
 	    @FXML
@@ -166,40 +167,37 @@ public class Client extends Application {
 	        	System.out.println(username.getText());
 	        	
 	        	//toServer.writeBytes(username.getText()+ ' ' + password.getText() +'\n'); 
-				User me = new User(username.getText(),"", password.getText(), "");
+				user = new User(username.getText(),"", password.getText(), "");
 
-	        	toServer.writeObject(me);
+	        	toServer.writeObject(user);
 	        	toServer.flush(); 
 				 try {
-					me  = (User) fromServer.readObject();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (me == null) {
+					user  = (User) fromServer.readObject();
+				} catch (ClassNotFoundException e) { e.printStackTrace(); }
+				if (user == null) {
 		        	System.out.println("Login failed!");
 
 				} else {
-				     Stage stage=(Stage) loginButton.getScene().getWindow();
-			         Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));
-			        /*try {
-						Chatroom.start(stage);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
-			        //create a new scene with root and set the stage
+					
+				    Stage stage=(Stage) loginButton.getScene().getWindow();
+			        Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));
 			        Scene scene = new Scene(root);
-			         stage.setScene(scene);
-			         stage.show();
+			        stage.setScene(scene);
+			        stage.show();
 					System.out.println("I logged in~~~~");
 
-
 				}
+				
 				//currentchat = allchats.get(0);	// default in global chat
 
 
 	         }
+	        
+	        if(event.getSource() == loginButton){
+				String incomingMsg = usertext.getText();
+				System.out.println(incomingMsg);
+	        }
+	        	
 	       }
 	    
 		public static void main(String[] args) { launch(args); }

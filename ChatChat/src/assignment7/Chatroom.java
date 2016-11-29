@@ -35,9 +35,6 @@ public class Chatroom {
 	private List<User> members;
 	private List<Message> messages;
 	
-	public List<Message> getMessages() {
-		return messages;
-	}
 	
 	@FXML	
 	private Button sendButton;
@@ -46,10 +43,10 @@ public class Chatroom {
 	@FXML	
 	private TextField chatlog;
 	
-	public void add(Message m){
-		messages.add(m);
-	}
+	public void add(Message m){ messages.add(m);}
 	
+	public List<Message> getMessages() { return messages; }
+
 	@FXML
 	private void handleSendAction(ActionEvent event) throws IOException{
 		   //  Stage stage; 
@@ -59,28 +56,6 @@ public class Chatroom {
 			System.out.println(incomingMsg);
 			//String pass = password.getText();
 	 }
-    public void start(Stage stage) throws Exception {
-    	try {
-    		//URL file = getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml");
-    		//System.out.println( file.toString() );
-    	
-	        Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
-	      //  Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml"));
-
-	        Scene scene = new Scene(root, 300, 275);
-	    
-	        stage.setTitle("FXML Welcome");
-	        stage.setScene(scene);
-	        stage.show();
-    	} catch(Exception e) {
-    		System.out.println(e);
-			e.printStackTrace();
-		}
-        
-    }
-
-
-
 
 }
 
