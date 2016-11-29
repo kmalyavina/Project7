@@ -14,6 +14,7 @@
 package assignment7;
 
 import java.io.BufferedReader;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -35,9 +36,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Client extends Application {
@@ -45,7 +52,8 @@ public class Client extends Application {
 		private User user;
 		private static ObjectOutputStream toServer = null;
 		private static ObjectInputStream fromServer = null;
-		
+		private Chatroom currentchat;
+
 	    @FXML
 	    private Hyperlink registerLink;
 	    @FXML
@@ -67,6 +75,65 @@ public class Client extends Application {
 	    @FXML
 	    private ImageView chatchatIcon;
 	    
+	    
+	    // chatroom
+	    @FXML
+	    private GridPane chatmessages;
+	    @FXML
+	    private TextArea usertext;
+	    @FXML
+	    private Button sendButton;
+	   
+	    
+	    
+	    @FXML
+	    private void displayMessages(){ 								// used when switching between chatrooms
+	    	chatmessages.getChildren().clear();
+	    	for(int k = 0; k < currentchat.getMessages().size(); k++){
+	    		Message message = currentchat.getMessages().get(k);		// get the message
+	    		ImageView icon = new ImageView(message.sender.avatar);	// get the icon
+	    		TextArea textarea = new TextArea(message.message);					// get the text contents
+    			textarea.setEditable(false);
+    			
+	    		textarea.setStyle("-fx-text-fill: #eeeeee;");
+	    		if (message.sender.equals(user)){	
+	    			textarea.setStyle("-fx-background-color: #353333");
+	    			textarea.setStyle("-fx-stroke: #A9A9A9");
+	    			textarea.setStyle("-fx-stroke-width: 1.5");
+	    			textarea.setStyle("-fx-stroke-dash-array: 18 9 3 9;");
+	    			textarea.setStyle("-fx-stroke-line-cap: round");
+
+	    		}
+	    		else 
+	    			textarea.setStyle("-fx-background-color: #A9A9A9");
+	    		
+	    		HBox m = new HBox(10, icon, textarea);						// put them next to each other    		
+	    		chatmessages.add(m, k, 2);								// add it to the grid in the scrollbox 
+	    	}
+	    }
+	    
+	    @FXML
+	    private void sendMessage(){ // press enter in usertext or press send button
+	    	if(usertext.getText() != ""){
+		    	Message meow = new Message(user, usertext.getText());
+		    	currentchat.add(meow);		// add the message to the current chatroom that's in focus
+		    	
+		    	ImageView icon = new ImageView(user.avatar);	// get the icon
+	    		TextArea textarea = new TextArea(usertext.getText());		// get the text contents
+    			textarea.setEditable(false);
+    			
+    			textarea.setStyle("-fx-background-color: #353333");
+    			textarea.setStyle("-fx-stroke: #A9A9A9");
+    			textarea.setStyle("-fx-stroke-width: 1.5");
+    			textarea.setStyle("-fx-stroke-dash-array: 18 9 3 9;");
+    			textarea.setStyle("-fx-stroke-line-cap: round");
+	    		
+	    		
+	    		HBox m = new HBox(7, icon, textarea);				// put them next to each other
+		    	chatmessages.add(m, currentchat.getMessages().size(), 2);	    	
+		    	usertext.setText("");
+	    	}
+	    }
 	    
 	    @FXML
 	    private void handleLinkAction(ActionEvent event) throws IOException{
@@ -129,6 +196,8 @@ public class Client extends Application {
 
 
 				}
+				//currentchat = allchats.get(0);	// default in global chat
+
 
 	         }
 	       }
@@ -159,14 +228,13 @@ public class Client extends Application {
 	        } catch (Exception e){
 	        	System.out.println(e);
 	        	System.out.println("Can't Connect");
-	        } 
-	        
-		
+	        }	
 			
 		}
 }
 
-class User implements Serializable{
+
+class User implements Serializable {
 	protected String userName;		// username(cannot change)(key)
 	protected String password;		// password for logging in (changable)
 	protected String displayName;	// displayed name (changable)
