@@ -13,17 +13,58 @@
 
 package assignment7;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
 //import assignment7.Client.User;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class Chatroom {
+	@FXML	
+	private Button sendButton;
+	@FXML	
+	private TextField msg;
+	@FXML	
+	private TextField chatlog;
+	
+	
+	@FXML
+	private void handleSendAction(ActionEvent event) throws IOException{
+		   //  Stage stage; 
+		    // Parent root;
+			
+			String incomingMsg = msg.getText();
+			System.out.println(incomingMsg);
+			//String pass = password.getText();
+	 }
+    public void start(Stage stage) throws Exception {
+    	try {
+    		//URL file = getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml");
+    		//System.out.println( file.toString() );
+    	
+	        Parent root = FXMLLoader.load(getClass().getResource("Chatroom.fxml"));
+	      //  Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assignment7"+File.separator+"Chatroom.fxml"));
+
+	        Scene scene = new Scene(root, 300, 275);
+	    
+	        stage.setTitle("FXML Welcome");
+	        stage.setScene(scene);
+	        stage.show();
+    	} catch(Exception e) {
+    		System.out.println(e);
+			e.printStackTrace();
+		}
+        
+    }
 	 // @Override
 
 	/*
