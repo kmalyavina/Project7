@@ -92,6 +92,8 @@ public class Client extends Application {
 	        if(event.getSource() == loginButton){ 
 	          // do login stuff
 	        	System.out.println("I logged in~~~~");
+	        	// status = online
+	        	// switch to chatroom fxml
 	         }
 	       }
 	    
@@ -144,5 +146,10 @@ class User{
 		avatar = img;
 		friends = new ArrayList<String>();
 		status = true;
+	}
+	
+	public String toString(){
+		return userName + " - " + displayName + " - " + password + " - " + avatar + " - " + status;
+		
 	}
 }

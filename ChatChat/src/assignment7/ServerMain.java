@@ -70,7 +70,10 @@ public class ServerMain extends Application {
 			while(scan.hasNext()){
 				friends.add(scan.next());
 			}
-			allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
+			User auser = new User(username, nickname, password, userIcon, s, friends);
+			System.out.println(auser);
+			allusers.put(username, auser);
+			//allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
 		}
 			
 		return allusers;
