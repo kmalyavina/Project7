@@ -50,8 +50,8 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
 		private User user;
-		private static ObjectOutputStream toServer = null;
-		private static ObjectInputStream fromServer = null;
+		 static ObjectOutputStream toServer = null;
+		 static ObjectInputStream fromServer = null;
 		private Chatroom currentchat;
 
 	    @FXML

@@ -54,9 +54,9 @@ public class Chatroom {
 	private void handleSendAction(ActionEvent event) throws IOException{
 		   //  Stage stage; 
 		    // Parent root;
-			
 			String incomingMsg = usertext.getText();
 			System.out.println(incomingMsg);
+			Client.toServer.writeObject(incomingMsg);
 			//String pass = password.getText();
 	 }
     public void start(Stage stage) throws Exception {
