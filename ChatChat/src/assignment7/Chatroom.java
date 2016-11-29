@@ -54,6 +54,7 @@ public class Chatroom {
 			String incomingMsg = usertext.getText();
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
+			usertext.setText("");
 			//String pass = password.getText();
 	 }
 

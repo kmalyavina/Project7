@@ -36,20 +36,10 @@ public class ServerMain extends Application {
 	ArrayList<String> userList = new ArrayList<String>();
 	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
 
-	
-	/*
-	 *  format:
-	 *  	username nickname password icon.png status friend1 friend2 friend3...
-	 * 
-	 * 
-	 */
 	private Map<String, User> buildUsers(){
 		scan = null;
 		
 		try {
-			//File test = new File("").getAbsoluteFile();
-			
-			//System.out.println(test.toString());
 			scan = new Scanner (new File("userList.txt"));
 		} catch (FileNotFoundException e) { System.out.println("File not found."); }
 			
@@ -65,6 +55,7 @@ public class ServerMain extends Application {
 			String userIcon = scan.next();
 			String status = scan.next();
 			Boolean s;
+			
 			if(status == "true")
 				s = true;
 			else
@@ -161,11 +152,12 @@ public class ServerMain extends Application {
 				//outputToClient.write(1);
 				// Continuously serve the client
 				boolean logged = false;
+				User credentials = null;
+
 				while (logged == false) { 
 					//scan = new Scanner(inputFromClient.read);
 					//String username = scan.next();
 					//String password = scan.next();
-					User credentials;
 					try {
 						credentials = (User) inputFromClient.readObject();
 						User currentUser = allusers.get(credentials.userName);
@@ -203,10 +195,10 @@ public class ServerMain extends Application {
 					//lastInput = input;
 				}
 				while (true) { 
-					try {
+					try {						
 						String msg = (String) inputFromClient.readObject();
-						System.out.println(msg);
-						ta.appendText(msg +
+						System.out.println(credentials.userName + ": "+ msg);
+						ta.appendText(credentials.userName + ": "+ msg +
 					  			 '\n'); 
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -224,30 +216,4 @@ public class ServerMain extends Application {
 		launch(args);
 	}
 }
-/*
-public class ServerMain {
-	
-	protected static Map<String, User> users; // database of users
-	protected static List<Chatroom> rooms; 	// chatroom at index 0 is global chat
-	protected static TextArea info;			// server status info
-	
-	static ServerSocket server;
-	
-	public ServerMain(){
-		try {
-			int port = 4444;
-			info = new TextArea();
-			info.setEditable(false);
-			info.appendText("<<< - Server established with port " + port + " - >>>\n");
-			server = new ServerSocket(port, 100);
-		} catch (IOException e) { e.printStackTrace(); }
-	}
-	
-	public static void main(String[] args){
-		new ServerMain(); // starts up the server
-		users = new HashMap<String, User>();
-		rooms = new ArrayList<Chatroom>();	
-	}
-	
-}
-*/
+

@@ -50,8 +50,8 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
 		private User user;
-		 static ObjectOutputStream toServer = null;
-		 static ObjectInputStream fromServer = null;
+		static ObjectOutputStream toServer = null;
+		static ObjectInputStream fromServer = null;
 		private Chatroom currentchat;
 
 	    @FXML
@@ -184,19 +184,13 @@ public class Client extends Application {
 			        Scene scene = new Scene(root);
 			        stage.setScene(scene);
 			        stage.show();
-					System.out.println("I logged in~~~~");
+					//System.out.println("I logged in~~~~");
 
 				}
 				
 				//currentchat = allchats.get(0);	// default in global chat
 
-
 	         }
-	        
-	        if(event.getSource() == loginButton){
-				String incomingMsg = usertext.getText();
-				System.out.println(incomingMsg);
-	        }
 	        	
 	       }
 	    
