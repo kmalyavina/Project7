@@ -79,7 +79,6 @@ public class Chatroom {
 						}
 
 	 }
-
 	
 	public void loadChatroom(){
 		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
@@ -114,10 +113,6 @@ public class Chatroom {
 					textmess.setMinHeight(50);
 					textmess.setMaxWidth(500);
 					textmess.setWrapText(true);
-					textmess.setStyle("-fx-background-color: #A9A9A9");
-
-					textmess.setStyle("-fx-background: #A9A9A9");
-
 					
 					chatmessages.add(icon, 0, i+1);
 					chatmessages.add(textmess, 1, i+1);
