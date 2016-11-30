@@ -198,20 +198,38 @@ public class ServerMain extends Application {
 					//lastInput = input;
 				}
 				while (true) { 
-					try {						
-						Message msg = new Message(credentials,(String) inputFromClient.readObject());
-						System.out.println(credentials.userName + ": "+ msg);
-						ta.appendText(credentials.userName + ": "+ msg + '\n'); 
-						String room = "general";
-						ArrayList<Message> fullRoom = messages.get(room);
-						if (fullRoom == null) {
-							fullRoom = new ArrayList<Message>();
+					String room = "general";
+
+					try {
+						Integer code = (Integer) inputFromClient.readObject();
+						if (code == 1) {
+							outputToClient.writeObject(messages.get(room));
+
 						}
-						fullRoom.add(msg);
-						messages.put("general", fullRoom);
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						//e.printStackTrace();
+					} catch (ClassCastException e) {
+					
+					}
+					try {			
+						synchronized (messages) {
+							Message msg = new Message(credentials,(String) inputFromClient.readObject());
+							System.out.println(credentials.userName + ": "+ msg);
+							ta.appendText(credentials.userName + ": "+ msg + '\n'); 
+							ArrayList<Message> fullRoom = messages.get(room);
+							if (fullRoom == null) {
+								fullRoom = new ArrayList<Message>();
+							}
+							fullRoom.add(msg);
+							messages.put(room, fullRoom);
+						}
+						outputToClient.flush();
+
+						//outputToClient.writeObject(fullRoom);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
 					}
 
 				}

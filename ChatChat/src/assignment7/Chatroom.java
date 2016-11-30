@@ -14,6 +14,11 @@
 package assignment7;
 
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.sql.Timestamp;
+import java.util.ArrayList;
+>>>>>>> branch 'master' of https://github.com/kmalyavina/Project7.git
 import java.util.List;
 
 //import assignment7.Client.User;
@@ -33,7 +38,8 @@ public class Chatroom {
 	private List<Message> messages;
 	private Chatroom currentchat;
 
-	
+	@FXML	
+	private Button refreshButton;	
 	@FXML	
 	private Button sendButton;
 	@FXML	
@@ -49,7 +55,34 @@ public class Chatroom {
 	public void add(Message m){ messages.add(m);}
 	
 	public List<Message> getMessages() { return messages; }
-
+	
+	@FXML
+	private void handleRefreshAction(ActionEvent event) throws IOException{
+		
+		
+				boolean waiting = true;
+				Client.toServer.writeObject(1);
+				while (waiting) {
+					try {
+						ArrayList<Message> fullRoom = (ArrayList<Message>) Client.fromServer.readObject();
+						for (Message m: fullRoom) {
+							System.out.println(m.message);
+							
+						}
+						waiting = false;
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+					//	e.printStackTrace();
+					}
+					catch (ClassCastException e) {
+						//Client.toServer.writeObject(1);
+					}
+				}
+		
+		
+			//usertext.setText("");
+			//String pass = password.getText();
+	 }
 	@FXML
 	private void handleSendAction(ActionEvent event) throws IOException{
 		   //  Stage stage; 
@@ -58,7 +91,8 @@ public class Chatroom {
 			//chatlog.appendText(incomingMsg);
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
-			usertext.setText("");
+			
+			//usertext.setText("");
 			//String pass = password.getText();
 	 }
 	@FXML

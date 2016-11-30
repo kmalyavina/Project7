@@ -59,7 +59,7 @@
                <children>
                   <ScrollPane hbarPolicy="NEVER" prefHeight="479.0" prefWidth="673.0" style="-fx-background-color: #353333;">
                     <content>
-                      <AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="652.0" style="-fx-background-color: #353333;">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="652.0" style="-fx-background-color: #353333;">
                            <children>
                               <GridPane id="chatmessages" fx:id="chatmessages" layoutX="27.0" prefHeight="102.0" prefWidth="576.0">
                                 <columnConstraints>
@@ -79,6 +79,7 @@
                      <children>
                         <TextArea id="usertext" fx:id="usertext" layoutX="67.0" layoutY="33.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.8" prefHeight="25.0" prefWidth="434.0" promptText="Walk on the keyboard..." wrapText="true" />
                         <Button id="sendButton" fx:id="sendButton" layoutX="512.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleSendAction" opacity="0.8" prefHeight="23.0" prefWidth="52.0" text="---&gt;" />
+                        <Button id="sendButton" fx:id="refreshButton" layoutX="8.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleRefreshAction" opacity="0.8" prefHeight="23.0" prefWidth="52.0" text="R" />
                      </children>
                   </Pane>
                </children>
