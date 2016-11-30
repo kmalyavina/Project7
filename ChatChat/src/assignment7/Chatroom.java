@@ -73,7 +73,7 @@ public class Chatroom {
 		for(int k = 0; k < currentchat.getMessages().size(); k++){
 			Message message = currentchat.getMessages().get(k);		// get the message
 			ImageView icon = new ImageView(message.sender.avatar);	// get the icon
-			TextArea textarea = new TextArea(message.message);					// get the text contents
+			TextArea textarea = new TextArea(message.message);		// get the text contents
 			textarea.setEditable(false);
 			
 			textarea.setStyle("-fx-text-fill: #eeeeee;");
