@@ -1,6 +1,8 @@
 package assignment7;
+import java.io.Serializable;
 
-public class Message {
+
+public class Message implements Serializable {
 	User sender;
 	String message;
 	
