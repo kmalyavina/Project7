@@ -72,7 +72,12 @@ public class Chatroom {
 		chatmessages.getChildren().clear();
 		for(int k = 0; k < currentchat.getMessages().size(); k++){
 			Message message = currentchat.getMessages().get(k);		// get the message
-			ImageView icon = new ImageView(message.sender.avatar);	// get the icon
+			ImageView icon = null;
+			try{
+			icon = new ImageView(message.sender.avatar);	// get the icon	
+			} catch (Exception e){
+				System.out.println("there was a problem getting the image");
+			}
 			TextArea textarea = new TextArea(message.message);		// get the text contents
 			textarea.setEditable(false);
 			

@@ -18,10 +18,8 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +47,7 @@ import javafx.stage.Stage;
 
 public class Client extends Application {
 
-		private User user;
+		 private User user;
 
 		 static ObjectOutputStream toServer = null;
 		 static ObjectInputStream fromServer = null;
@@ -75,13 +73,6 @@ public class Client extends Application {
 	    private Button selectAvatar;
 	    @FXML
 	    private ImageView chatchatIcon;
-	    
-	    
-
-	    
-	    
-
-	    
 
 	    
 	    @FXML
@@ -89,16 +80,13 @@ public class Client extends Application {
 	        Stage stage = null; 
 	        Parent root = null;
 	        if(event.getSource()==registerLink){
-	           //get reference to the button's stage         
 	           stage=(Stage) registerLink.getScene().getWindow();
-	           //load up OTHER FXML document
 	           root = FXMLLoader.load(getClass().getResource("Register.fxml"));
 	         }
 	        if(event.getSource()==loginLink){ 
 	          stage=(Stage) loginLink.getScene().getWindow();
 	          root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 	         }
-	        //create a new scene with root and set the stage
 	         Scene scene = new Scene(root);
 	         stage.setScene(scene);
 	         stage.show();
@@ -119,6 +107,7 @@ public class Client extends Application {
 
 	        	toServer.writeObject(user);
 	        	toServer.flush(); 
+	        	
 				 try {
 					currentUser  = (User) fromServer.readObject();
 				} catch (ClassNotFoundException e) { e.printStackTrace(); }
@@ -139,14 +128,7 @@ public class Client extends Application {
 				//currentchat = allchats.get(0);	// default in global chat
 
 	         }
-
-	        
-	     /*   if(event.getSource() == loginButton){
-				String incomingMsg = usertext.getText();
-				System.out.println(incomingMsg);
-	        }*/
-	        	
-	       }
+	    }
 	    
 		public static void main(String[] args) { launch(args); }
 		
