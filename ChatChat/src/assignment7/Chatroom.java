@@ -62,6 +62,7 @@ public class Chatroom {
 		   //  Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
+			chatlog.appendText(incomingMsg);
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
 			usertext.setText("");
