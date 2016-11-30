@@ -6,7 +6,7 @@
  * Brian Sutherland
  * bcs2433
  * 16445
- * Slip days used: 0
+ * Slip days used: 1
  * Fall 2016
  * GitHub Repository: https://github.com/kmalyavina/Project7
  */
@@ -15,7 +15,6 @@ package assignment7;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class Chatroom {
 	
@@ -47,13 +45,13 @@ public class Chatroom {
 	private TextField chatlog;
     @FXML
     private GridPane chatmessages;
- 
-    @FXML
-    private Label nameLabel;
 	
 	public void add(Message m){ messages.add(m);}
 	
 	public List<Message> getMessages() { return messages; }
+	
+    @FXML
+    private Label nameLabel;
 	
 	@FXML
 	private void handleRefreshAction(ActionEvent event) throws IOException{
@@ -96,9 +94,16 @@ public class Chatroom {
 	 }
 	
 	
+	public void loadChatroom(){
+		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");
+	}
+	
 	@FXML
 	private void handleSendAction(ActionEvent event) throws IOException{
-		   //  Stage stage; 
+		
+			loadChatroom();
+		
+			// Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
 			//chatlog.appendText(incomingMsg);
@@ -109,7 +114,23 @@ public class Chatroom {
 			ArrayList<Message> fullRoom;
 
 	
-				handleRefreshAction(null);
+				//handleRefreshAction(null);
+				for(int i = 0; i < 9; i++){
+					ImageView icon = new ImageView("file:img/" + i + ".png");		// replace the path with user icon
+					icon.setFitHeight(50);
+					icon.setFitWidth(50);
+					TextArea textmess = new TextArea("message #"+ i + "-------------------");		// get the text contents
+					textmess.setEditable(false);
+					textmess.setMinHeight(50);
+					textmess.setMaxWidth(500);
+					textmess.setWrapText(true);
+					
+					chatmessages.add(icon, 0, i+1);
+					chatmessages.add(textmess, 1, i+1);
+					
+				}
+
+			Client.toServer.flush();
 			//usertext.setText("");
 			//String pass = password.getText();
 	 }

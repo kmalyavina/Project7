@@ -6,7 +6,7 @@
  * Brian Sutherland
  * bcs2433
  * 16445
- * Slip days used: 0
+ * Slip days used: 1
  * Fall 2016
  * GitHub Repository: https://github.com/kmalyavina/Project7
  */
@@ -61,7 +61,6 @@ public class Client extends Application {
 	    private Button selectAvatar;
 	    @FXML
 	    private ImageView chatchatIcon;
-
 	    
 	    @FXML
 	    private void handleLinkAction(ActionEvent event) throws IOException{
@@ -105,7 +104,7 @@ public class Client extends Application {
 				} else {
 					
 				    Stage stage=(Stage) loginButton.getScene().getWindow();
-			        Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));
+			        Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));			        
 			        Scene scene = new Scene(root);
 			        stage.setScene(scene);
 			        stage.show();
@@ -131,7 +130,8 @@ public class Client extends Application {
 	    	Scene scene = new Scene(root);			 
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
-	
+
+	        
 	        try {
 				@SuppressWarnings("resource")
 		        Socket socket = new Socket("127.0.0.1", 8000);
