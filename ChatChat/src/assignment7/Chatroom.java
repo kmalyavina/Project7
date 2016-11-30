@@ -65,11 +65,30 @@ public class Chatroom {
 						Client.toServer.writeObject("+REFRESH+");
 						//Client.toServer.flush();
 
-						ArrayList<Message> fullRoom;
+						 
+						
 						try {
-							fullRoom = (ArrayList<Message>) Client.fromServer.readObject();
-							for (Message m: fullRoom) {
-								System.out.println(m.message);
+							Object fullRoom =  Client.fromServer.readObject();
+							Integer c = 1;
+					
+							for (Message m: (ArrayList<Message>)fullRoom) {
+								System.out.println(m.message+" at row:"+c);
+								chatmessages.getChildren().clear();
+								ImageView icon = new ImageView("file:img/"+m.sender.avatar);
+								icon.setFitHeight(50);
+								icon.setFitWidth(50);
+										
+								TextArea textarea = new TextArea(m.message);		// get the text contents
+								textarea.setEditable(false);
+								textarea.setMaxWidth(500);
+								textarea.setWrapText(true);
+								
+								chatmessages.add(icon, 0, c);								// add it to the grid in the scrollbox 
+								chatmessages.add(textarea, 1, c);
+								c++;
+																// add it to the grid in the scrollbox 
+									
+
 								
 							}
 							//Client.toServer.writeObject(true);
@@ -101,9 +120,12 @@ public class Chatroom {
 			//chatlog.appendText(incomingMsg);
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
+			Client.toServer.flush();
 
 			ArrayList<Message> fullRoom;
 
+	
+				//handleRefreshAction(null);
 				for(int i = 0; i < 9; i++){
 					ImageView icon = new ImageView("file:img/" + i + ".png");		// replace the path with user icon
 					icon.setFitHeight(50);

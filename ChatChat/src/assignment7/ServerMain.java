@@ -206,17 +206,20 @@ public class ServerMain extends Application {
 						String in = (String) inputFromClient.readObject();
 						if (in.equals("+REFRESH+")) {
 							System.out.println("Refreshing!");
-							outputToClient.writeObject(messages.get(room));
+							ArrayList<Message> fullRoom = messages.get(room);
+							outputToClient.writeObject(fullRoom);
 
 						} else{
 						synchronized (messages) {
 							Message msg = new Message(credentials,in);
-							System.out.println(credentials.userName + ": "+ msg);
-							ta.appendText(credentials.userName + ": "+ msg + '\n'); 
+							System.out.println(credentials.userName + ": "+ in);
+							ta.appendText(credentials.userName + ": "+ in + '\n'); 
 							ArrayList<Message> fullRoom = messages.get(room);
 							if (fullRoom == null) {
 								fullRoom = new ArrayList<Message>();
 							}
+							System.out.println("Adding: "+in);
+
 							fullRoom.add(msg);
 							messages.put(room, fullRoom);
 						}
