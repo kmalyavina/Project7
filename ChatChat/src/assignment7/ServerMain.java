@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import chat_javafx_liang.MultiThreadServer.HandleAClient;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
