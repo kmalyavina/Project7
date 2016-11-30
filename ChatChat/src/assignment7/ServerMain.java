@@ -230,7 +230,9 @@ public class ServerMain extends Application {
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						//e.printStackTrace();
-					}
+					} catch (ClassCastException e) {
+						
+						}
 
 				}
 			} catch(IOException e) {
