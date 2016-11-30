@@ -45,13 +45,13 @@ public class Chatroom {
 	private TextField chatlog;
     @FXML
     private GridPane chatmessages;
- 
-    @FXML
-    private Label nameLabel;
 	
 	public void add(Message m){ messages.add(m);}
 	
 	public List<Message> getMessages() { return messages; }
+	
+    @FXML
+    private Label nameLabel;
 	
 	@FXML
 	private void handleRefreshAction(ActionEvent event) throws IOException{
@@ -75,9 +75,16 @@ public class Chatroom {
 	 }
 	
 	
+	public void loadChatroom(){
+		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");
+	}
+	
 	@FXML
 	private void handleSendAction(ActionEvent event) throws IOException{
-		   //  Stage stage; 
+		
+			loadChatroom();
+		
+			// Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
 			//chatlog.appendText(incomingMsg);
