@@ -14,11 +14,8 @@
 package assignment7;
 
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.sql.Timestamp;
 import java.util.ArrayList;
->>>>>>> branch 'master' of https://github.com/kmalyavina/Project7.git
 import java.util.List;
 
 //import assignment7.Client.User;
