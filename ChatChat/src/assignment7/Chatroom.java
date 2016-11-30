@@ -62,7 +62,7 @@ public class Chatroom {
 		   //  Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
-			chatlog.appendText(incomingMsg);
+			//chatlog.appendText(incomingMsg);
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
 			usertext.setText("");
@@ -74,7 +74,7 @@ public class Chatroom {
 		for(int k = 0; k < currentchat.getMessages().size(); k++){
 			Message message = currentchat.getMessages().get(k);		// get the message
 			ImageView icon = new ImageView(message.sender.avatar);	// get the icon
-			TextArea textarea = new TextArea(message.message);		// get the text contents
+			TextArea textarea = new TextArea(message.message);					// get the text contents
 			textarea.setEditable(false);
 			
 			textarea.setStyle("-fx-text-fill: #eeeeee;");
@@ -119,22 +119,4 @@ public class Chatroom {
 }
 
 
-class Message {
-	User sender;
-	String message;
-	//Timestamp timestamp;
-	
-	/**
-	 * Message constructor
-	 * Called when client presses enter to send a message to a chatroom
-	 * 
-	 * @param s sender
-	 * @param m message
-	 * @param time timestamp
-	 */
-	
-	public Message(User s, String m){
-		sender = s;
-		message = m;
-	}
-}
+

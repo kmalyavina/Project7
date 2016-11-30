@@ -35,6 +35,8 @@ public class ServerMain extends Application {
 	private static Map<String, User> allusers = new HashMap<>();
 	ArrayList<String> userList = new ArrayList<String>();
 	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
+	private static Map<String, ArrayList<Message>> messages = new HashMap<>();
+
 	
 
 	private Map<String, User> buildUsers(){
@@ -103,7 +105,7 @@ public class ServerMain extends Application {
 						+ new Date() + '\n'); 
 
 
-				while (true) { 
+				while (true) {key 
 					// Listen for a new connection request 
 					Socket socket = serverSocket.accept(); 
 
@@ -197,9 +199,16 @@ public class ServerMain extends Application {
 				}
 				while (true) { 
 					try {						
-						String msg = (String) inputFromClient.readObject();
+						Message msg = new Message(credentials,(String) inputFromClient.readObject());
 						System.out.println(credentials.userName + ": "+ msg);
 						ta.appendText(credentials.userName + ": "+ msg + '\n'); 
+						String room = "general";
+						ArrayList<Message> fullRoom = messages.get(room);
+						if (fullRoom == null) {
+							fullRoom = new ArrayList<Message>();
+						}
+						fullRoom.add(msg);
+						messages.put("general", fullRoom);
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
