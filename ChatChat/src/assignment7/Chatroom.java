@@ -86,21 +86,19 @@ public class Chatroom {
 
 			ArrayList<Message> fullRoom;
 
-				for(int i = 0; i < 9; i++){
+				for(int i = 0; i < 10; i++){
 					ImageView iconn = new ImageView("file:img/" + i + ".png");
 					iconn.setFitHeight(50);
 					iconn.setFitWidth(50);
-					TextArea textmess = new TextArea(i + "-------------------MEOW MEOW MEOW lorem ipsum delor.....");		// get the text contents
+					TextArea textmess = new TextArea(i + "-------------------");		// get the text contents
 					textmess.setEditable(false);
 					textmess.setMaxWidth(500);
 					textmess.setWrapText(true);
 					
 					chatmessages.add(iconn, 0, i+1);
-					chatmessages.add(textmess, 1, i+1);
+					chatmessages.add(textmess, 1, i+1); //hello
 					
 				}
-					
-
 
 			Client.toServer.flush();
 			//usertext.setText("");
