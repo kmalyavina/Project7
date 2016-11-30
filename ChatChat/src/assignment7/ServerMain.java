@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import chat_javafx_liang.MultiThreadServer.HandleAClient;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -97,7 +98,6 @@ public class ServerMain extends Application {
 		primaryStage.setTitle("MultiThreadServer"); // Set the stage title 
 		primaryStage.setScene(scene); // Place the scene in the stage 
 		primaryStage.show(); // Display the stage 
-
 		new Thread( () -> { 
 			try {  // Create a server socket 
 				ServerSocket serverSocket = new ServerSocket(8000); 
@@ -105,7 +105,7 @@ public class ServerMain extends Application {
 						+ new Date() + '\n'); 
 
 
-				while (true) {key 
+				while (true) { 
 					// Listen for a new connection request 
 					Socket socket = serverSocket.accept(); 
 
@@ -133,6 +133,7 @@ public class ServerMain extends Application {
 				System.err.println(ex);
 			}
 		}).start();
+	
 	}
 
 
