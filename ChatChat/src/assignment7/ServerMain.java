@@ -6,7 +6,7 @@
  * Brian Sutherland
  * bcs2433
  * 16445
- * Slip days used: 0
+ * Slip days used: 1
  * Fall 2016
  * GitHub Repository: https://github.com/kmalyavina/Project7
  */

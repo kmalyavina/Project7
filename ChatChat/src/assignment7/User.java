@@ -1,3 +1,16 @@
+/* User.java
+ * EE422C Project 7 submission by
+ * Katya Malyavina
+ * ym5356
+ * 16465
+ * Brian Sutherland
+ * bcs2433
+ * 16445
+ * Slip days used: 1
+ * Fall 2016
+ * GitHub Repository: https://github.com/kmalyavina/Project7
+ */
+
 package assignment7;
 
 import java.io.Serializable;
