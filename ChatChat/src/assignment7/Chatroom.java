@@ -62,23 +62,27 @@ public class Chatroom {
 						 
 						
 						try {
-							Object fullRoom =  Client.fromServer.readObject();
+							//Object fullRoom =  Client.fromServer.readObject();
 							Integer c = 1;
-					
-							for (Message m: (ArrayList<Message>)fullRoom) {
+							chatmessages.getChildren().clear();
+
+							while (true) {
+								Message m = (Message) Client.fromServer.readObject();
+								if (m.message.equals("+END+")) {break;}
 								System.out.println(m.message+" at row:"+c);
-								chatmessages.getChildren().clear();
-								ImageView icon = new ImageView("file:img/"+m.sender.avatar);
+								ImageView icon = new ImageView("file:img/" +m.sender.avatar);		// replace the path with user icon
 								icon.setFitHeight(50);
 								icon.setFitWidth(50);
-										
-								TextArea textarea = new TextArea(m.message);		// get the text contents
-								textarea.setEditable(false);
-								textarea.setMaxWidth(500);
-								textarea.setWrapText(true);
+								TextArea textmess = new TextArea(m.message);		// get the text contents
+								textmess.setEditable(false);
+								textmess.setMinHeight(50);
+								textmess.setMaxWidth(500);
+								textmess.setWrapText(true);
 								
-								chatmessages.add(icon, 0, c);								// add it to the grid in the scrollbox 
-								chatmessages.add(textarea, 1, c);
+								chatmessages.add(icon, 0, c);
+								chatmessages.add(textmess, 1, c);
+								
+							
 								c++;
 																// add it to the grid in the scrollbox 
 									
@@ -114,8 +118,8 @@ public class Chatroom {
 			ArrayList<Message> fullRoom;
 
 	
-				//handleRefreshAction(null);
-				for(int i = 0; i < 9; i++){
+				handleRefreshAction(null);
+			/*	for(int i = 0; i < 9; i++){
 					ImageView icon = new ImageView("file:img/" + i + ".png");		// replace the path with user icon
 					icon.setFitHeight(50);
 					icon.setFitWidth(50);
@@ -128,7 +132,7 @@ public class Chatroom {
 					chatmessages.add(icon, 0, i+1);
 					chatmessages.add(textmess, 1, i+1);
 					
-				}
+				}*/
 
 			Client.toServer.flush();
 			//usertext.setText("");

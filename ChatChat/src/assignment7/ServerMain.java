@@ -206,8 +206,15 @@ public class ServerMain extends Application {
 						String in = (String) inputFromClient.readObject();
 						if (in.equals("+REFRESH+")) {
 							System.out.println("Refreshing!");
+							
 							ArrayList<Message> fullRoom = messages.get(room);
-							outputToClient.writeObject(fullRoom);
+							Integer c=1;
+							for (Message m: (ArrayList<Message>)fullRoom) {
+								outputToClient.writeObject(m);
+								//System.out.println(m.message+" at row:"+c++);
+							}
+							outputToClient.writeObject(new Message(credentials,"+END+"));
+
 
 						} else{
 						synchronized (messages) {
