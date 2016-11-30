@@ -25,7 +25,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -45,6 +47,8 @@ public class Chatroom {
 	private TextField chatlog;
     @FXML
     private GridPane chatmessages;
+    @FXML
+    private GridPane roomlist;
 	
 	public void add(Message m){ messages.add(m);}
 	
@@ -52,6 +56,8 @@ public class Chatroom {
 	
     @FXML
     private Label nameLabel;
+    @FXML
+    private ImageView userIcon;
 	
 	@FXML
 	private void handleRefreshAction(ActionEvent event) throws IOException{
@@ -73,10 +79,16 @@ public class Chatroom {
 						}
 
 	 }
-	
+
 	
 	public void loadChatroom(){
-		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");
+		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
+		String url = "file:" + Client.currentUser.avatar;
+		Image icon = new Image(url);		// replace the path with user icon
+		System.out.println(Client.currentUser.avatar); //
+
+		userIcon.setImage(icon); //
+		
 	}
 	
 	@FXML
@@ -102,6 +114,10 @@ public class Chatroom {
 					textmess.setMinHeight(50);
 					textmess.setMaxWidth(500);
 					textmess.setWrapText(true);
+					textmess.setStyle("-fx-background-color: #A9A9A9");
+
+					textmess.setStyle("-fx-background: #A9A9A9");
+
 					
 					chatmessages.add(icon, 0, i+1);
 					chatmessages.add(textmess, 1, i+1);
@@ -144,6 +160,7 @@ public class Chatroom {
 			chatmessages.add(m, k, 2);								// add it to the grid in the scrollbox 
 		}
 	}
+	
     @FXML
     private void sendMessage(){ // press enter in usertext or press send button
     	if(usertext.getText() != ""){
