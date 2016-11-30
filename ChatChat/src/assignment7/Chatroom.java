@@ -110,10 +110,8 @@ public class Chatroom {
 	}
 	
 	@FXML
-	private void handleSendAction(ActionEvent event) throws IOException{
-		
+	private void handleSendAction(ActionEvent event) throws IOException{	
 			loadChatroom();
-		
 			// Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
@@ -177,29 +175,6 @@ public class Chatroom {
 			chatmessages.add(m, k, 2);								// add it to the grid in the scrollbox 
 		}
 	}
-	
-    @FXML
-    private void sendMessage(){ // press enter in usertext or press send button
-    	if(usertext.getText() != ""){
-	    	Message meow = new Message(Client.currentUser, usertext.getText());
-	    	currentchat.add(meow);		// add the message to the current chatroom that's in focus
-	    	
-	    	ImageView icon = new ImageView(Client.currentUser.avatar);	// get the icon
-    		TextArea textarea = new TextArea(usertext.getText());		// get the text contents
-			textarea.setEditable(false);
-			
-			textarea.setStyle("-fx-background-color: #353333");
-			textarea.setStyle("-fx-stroke: #A9A9A9");
-			textarea.setStyle("-fx-stroke-width: 1.5");
-			textarea.setStyle("-fx-stroke-dash-array: 18 9 3 9;");
-			textarea.setStyle("-fx-stroke-line-cap: round");
-    		
-    		
-    		HBox m = new HBox(7, icon, textarea);				// put them next to each other
-	    	chatmessages.add(m, currentchat.getMessages().size(), 2);	    	
-	    	usertext.setText("");
-    	}
-    }
 
 }
 
