@@ -199,22 +199,18 @@ public class ServerMain extends Application {
 				}
 				while (true) { 
 					String room = "general";
+			
 
-					try {
-						Integer code = (Integer) inputFromClient.readObject();
-						if (code == 1) {
+			
+					try {	
+						String in = (String) inputFromClient.readObject();
+						if (in.equals("+REFRESH+")) {
+							System.out.println("Refreshing!");
 							outputToClient.writeObject(messages.get(room));
 
-						}
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						//e.printStackTrace();
-					} catch (ClassCastException e) {
-					
-					}
-					try {			
+						} else{
 						synchronized (messages) {
-							Message msg = new Message(credentials,(String) inputFromClient.readObject());
+							Message msg = new Message(credentials,in);
 							System.out.println(credentials.userName + ": "+ msg);
 							ta.appendText(credentials.userName + ": "+ msg + '\n'); 
 							ArrayList<Message> fullRoom = messages.get(room);
@@ -224,7 +220,8 @@ public class ServerMain extends Application {
 							fullRoom.add(msg);
 							messages.put(room, fullRoom);
 						}
-						outputToClient.flush();
+						}
+						//outputToClient.flush();
 
 						//outputToClient.writeObject(fullRoom);
 					} catch (ClassNotFoundException e) {

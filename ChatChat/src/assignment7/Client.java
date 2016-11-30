@@ -121,6 +121,9 @@ public class Client extends Application {
 	    
 		public static void main(String[] args) { launch(args); }
 		
+		public static void note() {
+			Client.toServer.notify();
+		}
 		@Override
 		public void start(Stage primaryStage) throws Exception{
 			primaryStage.setTitle("Chat.Chat");

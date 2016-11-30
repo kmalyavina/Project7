@@ -57,24 +57,27 @@ public class Chatroom {
 	private void handleRefreshAction(ActionEvent event) throws IOException{
 		
 		
-				boolean waiting = true;
-				Client.toServer.writeObject(1);
-				while (waiting) {
-					try {
-						ArrayList<Message> fullRoom = (ArrayList<Message>) Client.fromServer.readObject();
-						for (Message m: fullRoom) {
-							System.out.println(m.message);
-							
+				
+						
+						Client.toServer.writeObject("+REFRESH+");
+						//Client.toServer.flush();
+
+						ArrayList<Message> fullRoom;
+						try {
+							fullRoom = (ArrayList<Message>) Client.fromServer.readObject();
+							for (Message m: fullRoom) {
+								System.out.println(m.message);
+								
+							}
+							//Client.toServer.writeObject(true);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-						waiting = false;
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-					//	e.printStackTrace();
-					}
-					catch (ClassCastException e) {
-						//Client.toServer.writeObject(1);
-					}
-				}
+
+
+				
+				
 		
 		
 			//usertext.setText("");
@@ -88,7 +91,7 @@ public class Chatroom {
 			//chatlog.appendText(incomingMsg);
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
-			
+			Client.toServer.flush();
 			//usertext.setText("");
 			//String pass = password.getText();
 	 }
