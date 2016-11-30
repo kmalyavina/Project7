@@ -15,7 +15,6 @@ package assignment7;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class Chatroom {
 	
@@ -88,29 +86,19 @@ public class Chatroom {
 
 			ArrayList<Message> fullRoom;
 
-				ImageView icon = new ImageView("file:img/0.png");
-				icon.setFitHeight(50);
-				icon.setFitWidth(50);
-						
-				TextArea textarea = new TextArea("testing testing 123");		// get the text contents
-				textarea.setEditable(false);
-				textarea.setMaxWidth(500);
-				textarea.setWrapText(true);
-
-				
-				ImageView icon2 = new ImageView("file:img/2.png");
-				icon2.setFitHeight(50);
-				icon2.setFitWidth(50);
-				
-				chatmessages.add(icon, 0, 1);								// add it to the grid in the scrollbox 
-				chatmessages.add(textarea, 1, 1);								// add it to the grid in the scrollbox 
-				TextArea textarea2 = new TextArea("testing testing 123");		// get the text contents
-				textarea2.setEditable(false);
-				textarea2.setMaxWidth(500);
-				textarea2.setWrapText(true);
-				
-				chatmessages.add(icon2, 0, 2);								// add it to the grid in the scrollbox 
-				chatmessages.add(textarea2, 1, 2);								// add it to the grid in the scrollbox 
+				for(int i = 0; i < 9; i++){
+					ImageView iconn = new ImageView("file:img/" + i + ".png");
+					iconn.setFitHeight(50);
+					iconn.setFitWidth(50);
+					TextArea textmess = new TextArea(i + "-------------------MEOW MEOW MEOW lorem ipsum delor.....");		// get the text contents
+					textmess.setEditable(false);
+					textmess.setMaxWidth(500);
+					textmess.setWrapText(true);
+					
+					chatmessages.add(iconn, 0, i+1);
+					chatmessages.add(textmess, 1, i+1);
+					
+				}
 					
 
 
