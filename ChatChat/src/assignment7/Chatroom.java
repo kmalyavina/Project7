@@ -86,17 +86,18 @@ public class Chatroom {
 
 			ArrayList<Message> fullRoom;
 
-				for(int i = 0; i < 10; i++){
-					ImageView iconn = new ImageView("file:img/" + i + ".png");
-					iconn.setFitHeight(50);
-					iconn.setFitWidth(50);
-					TextArea textmess = new TextArea(i + "-------------------");		// get the text contents
+				for(int i = 0; i < 9; i++){
+					ImageView icon = new ImageView("file:img/" + i + ".png");		// replace the path with user icon
+					icon.setFitHeight(50);
+					icon.setFitWidth(50);
+					TextArea textmess = new TextArea("message #"+ i + "-------------------");		// get the text contents
 					textmess.setEditable(false);
+					textmess.setMinHeight(50);
 					textmess.setMaxWidth(500);
 					textmess.setWrapText(true);
 					
-					chatmessages.add(iconn, 0, i+1);
-					chatmessages.add(textmess, 1, i+1); //hello
+					chatmessages.add(icon, 0, i+1);
+					chatmessages.add(textmess, 1, i+1);
 					
 				}
 
