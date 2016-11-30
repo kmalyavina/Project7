@@ -13,16 +13,11 @@
 
 package assignment7;
 
-import java.io.BufferedReader;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -34,15 +29,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Client extends Application {
@@ -128,6 +116,7 @@ public class Client extends Application {
 				//currentchat = allchats.get(0);	// default in global chat
 
 	         }
+	        
 	    }
 	    
 		public static void main(String[] args) { launch(args); }

@@ -13,18 +13,12 @@
 
 package assignment7;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
 
 //import assignment7.Client.User;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -32,11 +26,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 public class Chatroom {
 	
-	private List<User> members;
+	//private List<User> members;
 	private List<Message> messages;
 	private Chatroom currentchat;
 
@@ -62,6 +55,7 @@ public class Chatroom {
 		   //  Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
+			//chatlog.appendText(incomingMsg);
 			System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
 			usertext.setText("");
@@ -72,6 +66,7 @@ public class Chatroom {
 		chatmessages.getChildren().clear();
 		for(int k = 0; k < currentchat.getMessages().size(); k++){
 			Message message = currentchat.getMessages().get(k);		// get the message
+
 			ImageView icon = null;
 			try{
 			icon = new ImageView(message.sender.avatar);	// get the icon	
@@ -79,6 +74,7 @@ public class Chatroom {
 				System.out.println("there was a problem getting the image");
 			}
 			TextArea textarea = new TextArea(message.message);		// get the text contents
+
 			textarea.setEditable(false);
 			
 			textarea.setStyle("-fx-text-fill: #eeeeee;");
@@ -123,22 +119,4 @@ public class Chatroom {
 }
 
 
-class Message {
-	User sender;
-	String message;
-	//Timestamp timestamp;
-	
-	/**
-	 * Message constructor
-	 * Called when client presses enter to send a message to a chatroom
-	 * 
-	 * @param s sender
-	 * @param m message
-	 * @param time timestamp
-	 */
-	
-	public Message(User s, String m){
-		sender = s;
-		message = m;
-	}
-}
+
