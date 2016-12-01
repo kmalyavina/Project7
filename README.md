@@ -1,4 +1,4 @@
-# Project5
+# Project7
 
 Chat Client: Private Chat + Group Chat
 --
@@ -17,10 +17,8 @@ You are encouraged to design the UI based on your experience of using chat room 
 	- register
 
 - chat client
-	- list of users/friends
+	- list of users
 	- chat window
-		- your messages on left
-		- other people's messages on right
 	- group chat
 	- private chat
 
