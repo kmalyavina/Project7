@@ -13,7 +13,6 @@
 
 package assignment7;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.IntStream;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 //import assignment7.Client.User;
 import javafx.event.ActionEvent;
@@ -35,10 +31,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
+import javafx.scene.paint.Color;
 
 public class Chatroom {
 	
@@ -66,10 +61,9 @@ public class Chatroom {
     	try {
 			handleRefreshAction(null);
 			time = true;
-
-			
+		
 			nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
-			String url = "file:img/" + Client.currentUser.avatar;
+			String url = "file:bin/img/" + Client.currentUser.avatar;
 			Image icon = new Image(url);
 			userIcon.setImage(icon); 
 			refreshChatList();
@@ -120,9 +114,26 @@ public class Chatroom {
 		chaticon.setImage(icon);
 		
 		Label chatname = new Label("Global Chat");
+		chatname.setTextFill(Color.LIGHTGREY);;
 		
-		roomlist.add(chaticon, 0, 1);
-		roomlist.add(chatname, 1, 0);
+		roomlist.add(chaticon, 0, 0);
+		roomlist.add(chatname, 1, 0);//
+		
+		int roomnum = 1;
+//		for(User u : Client.fromServer.readObject()) {	// for every user in the server user map...
+//			if(u.status = true){
+//				if(u.userName != Client.currentUser.userName){
+//					chaticon = new ImageView();
+//					chaticon.setFitHeight(50);
+//					chaticon.setFitWidth(50);
+//					chatname.setText(u.userName);
+//					roomlist.add(chaticon, 0, roomnum);
+//					roomlist.add(chatname, 1, roomnum);
+//					roomnum++;
+//				}
+//			}
+//		}
+		
     }
     
 	@FXML
