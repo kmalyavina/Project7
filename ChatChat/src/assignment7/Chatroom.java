@@ -17,7 +17,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 //import assignment7.Client.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,12 +35,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 public class Chatroom {
 	
 	//private List<User> members;
 	private List<Message> messages;
 	private Chatroom currentchat;
+	private boolean time = false;
 
 	@FXML	
 	private Button refreshButton;	
@@ -49,6 +56,16 @@ public class Chatroom {
     private GridPane chatmessages;
     @FXML
     private GridPane roomlist;
+    @FXML
+    protected void initialize() {
+    	try {
+			handleRefreshAction(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        };
 	
 	public void add(Message m){ messages.add(m);}
 	
@@ -58,15 +75,14 @@ public class Chatroom {
     private Label nameLabel;
     @FXML
     private ImageView userIcon;
-	
+    
+
 	@FXML
-	private void handleRefreshAction(ActionEvent event) throws IOException{
+	 void handleRefreshAction(ActionEvent event) throws IOException{
 		
 						Client.toServer.writeObject("+REFRESH+");
 						//Client.toServer.flush();
-
-						 
-						
+					
 						try {
 							//Object fullRoom =  Client.fromServer.readObject();
 							Integer c = 1;
@@ -75,8 +91,9 @@ public class Chatroom {
 							while (true) {
 								Message m = (Message) Client.fromServer.readObject();
 								if (m.message.equals("+END+")) {break;}
-								System.out.println(m.message+" at row:"+c);
-								ImageView icon = new ImageView("file:img/" +m.sender.avatar);		// replace the path with user icon
+							//	System.out.println(m.sender.avatar);
+								ImageView icon = new ImageView("file:img/"+m.sender.avatar );		// replace the path with user icon
+						
 								icon.setFitHeight(50);
 								icon.setFitWidth(50);
 								TextArea textmess = new TextArea(m.message);		// get the text contents
@@ -110,6 +127,7 @@ public class Chatroom {
 		System.out.println(Client.currentUser.avatar); //
 
 		userIcon.setImage(icon); //
+
 		
 	}
 	

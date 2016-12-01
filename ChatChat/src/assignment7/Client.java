@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -62,6 +64,22 @@ public class Client extends Application {
 	    @FXML
 	    private ImageView chatchatIcon;
 	    
+	
+	    protected void initialize() {
+	    /*	new Timer().scheduleAtFixedRate(new TimerTask() {   
+			    public void run() {
+			    	try {
+						//handleRefreshAction(null);
+			    		System.out.println("Refresh Please!");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			        // Here comes your void to refresh the whole application.
+
+			    }
+			}, 2000, 2000);/*/
+	    }
 	    @FXML
 	    private void handleLinkAction(ActionEvent event) throws IOException{
 	        Stage stage = null; 
@@ -134,7 +152,9 @@ public class Client extends Application {
 	        
 	        try {
 				@SuppressWarnings("resource")
-		        Socket socket = new Socket("127.0.0.1", 8000);
+		     //   Socket socket = new Socket("127.0.0.1", 8000);
+		        Socket socket = new Socket("10.145.177.101", 8000);
+
 		       fromServer = new ObjectInputStream(socket.getInputStream());
 			       toServer = new ObjectOutputStream(socket.getOutputStream());
 
