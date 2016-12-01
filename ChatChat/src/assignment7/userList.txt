@@ -1,2 +1,0 @@
-username nickname password 0.png status friend1 friend2 friend3
-a nickname a 2.png status friend1 friend2 friend3
