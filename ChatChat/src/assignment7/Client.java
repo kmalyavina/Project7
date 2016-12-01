@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.IntStream;
@@ -34,6 +35,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class Client extends Application {
@@ -61,9 +64,13 @@ public class Client extends Application {
 	    @FXML
 	    private Label error;
 	    @FXML
-	    private Button selectAvatar;
+	    private Button selecticon;
+	    @FXML
+	    private Button iconselected;
 	    @FXML
 	    private ImageView chatchatIcon;
+	    
+	    static String selectedicon;
 	    
 	
 	    protected void initialize() {
@@ -100,11 +107,52 @@ public class Client extends Application {
 	         stage.show();
 	       }
 	    
-	    @FXML
+	    @SuppressWarnings("deprecation")
+		@FXML
 	    private void handleButtonAction(ActionEvent event) throws IOException{
+	    	
+	    	 if(event.getSource() == selecticon){	    		 
+	    		 Stage stage = new Stage();
+			     Parent root = FXMLLoader.load(getClass().getResource("IconSelect.fxml"));			        
+	    		 stage.setScene(new Scene(root));
+	    		 stage.initModality(Modality.APPLICATION_MODAL);
+	    		 stage.initOwner(selecticon.getScene().getWindow());
+	    		 stage.showAndWait();	    		 
+	    	 }
+	    		 
+    		 if(event.getSource() == iconselected){
+ 	        	Stage stage = (Stage) iconselected.getScene().getWindow();
+ 	        	stage.close();
+ 	        	
+ 	        	//selecticon.setGraphic();
+ 	        	
+    		 }
+	    		 
 	        if(event.getSource() == registerButton){
 	           // do registration stuff
-	        	System.out.println("I registered!!!!!");
+	        	// check to make sure the username is not already in use
+	        	ImageView img = (ImageView) selecticon.getGraphic();
+	        	String fullpath = img.getImage().impl_getUrl();		// YES, I KNOW IT'S NOT GOOD PRACTICE, BUT I NEED IT Q-Q
+
+	        	int index = fullpath.lastIndexOf("/");
+	        	String fileName = fullpath.substring(index + 1);
+
+	        	System.out.println(fileName);
+	        	
+	        	user = new User(username.getText(), nickname.getText(), password.getText(), fileName);
+	        	
+	        	toServer.writeObject(user);
+	        	toServer.flush(); 
+	        	
+				 try {
+					currentUser  = (User) fromServer.readObject();
+				} catch (ClassNotFoundException e) { e.printStackTrace(); }
+				 
+	        	Stage stage = (Stage) registerButton.getScene().getWindow();
+		        Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));			        
+		        Scene scene = new Scene(root);
+		        stage.setScene(scene);
+		        stage.show();
 	         }
 	        if(event.getSource() == loginButton){ 
 	          // do login stuff

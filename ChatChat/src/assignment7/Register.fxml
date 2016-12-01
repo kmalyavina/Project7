@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,15 +11,25 @@
 
 <Pane fx:id="registerpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="850.0" style="-fx-background-color: #353333;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment7.Client">
    <children>
-      <ImageView id="chatchatIcon" fitHeight="150.0" fitWidth="100.0" layoutX="376.0" layoutY="135.0" preserveRatio="true">
-         <image>
-            <Image url="@img/iconselect.png" />
-         </image>
-      </ImageView>
+
       <TextField id="username" layoutX="351.0" layoutY="267.0" promptText="Username" />
       <TextField id="nickname" layoutX="350.0" layoutY="301.0" promptText="Nickname" />
       <PasswordField id="password" layoutX="350.0" layoutY="334.0" promptText="Password" />
       <Button id="registerButton" fx:id="registerButton" layoutX="350.0" layoutY="367.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="149.0" text="Register!" />
-      <Hyperlink id="loginLink" fx:id="loginLink" layoutX="405.0" layoutY="403.0" onAction="#handleLinkAction" text="Login" textAlignment="CENTER" textFill="#727475" />
+      <Hyperlink id="loginLink" fx:id="loginLink" layoutX="338.0" layoutY="403.0" onAction="#handleLinkAction" text="Already have an account? Login!" textAlignment="CENTER" textFill="#727475" />
+      
+      <fx:define>
+   			<Image fx:id="btnImage" url="@img/iconselect.png" />
+	  </fx:define>
+      
+      <Button id="selecticon" fx:id="selecticon" layoutX="365.0" layoutY="145.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonAction" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView image="$btnImage" fitHeight="100.0" fitWidth="100.0"/>
+         </graphic>
+         
+         </Button>
    </children>
 </Pane>
