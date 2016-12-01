@@ -29,6 +29,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -53,6 +54,8 @@ public class Chatroom {
 	private TextArea usertext;
 	@FXML	
 	private TextField chatlog;
+	@FXML
+	private ScrollPane chatscroll;
     @FXML
     private GridPane chatmessages;
     @FXML
@@ -62,10 +65,14 @@ public class Chatroom {
     	try {
 			handleRefreshAction(null);
 			time = true;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			
+			nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
+			String url = "file:img/" + Client.currentUser.avatar;
+			Image icon = new Image(url);
+			userIcon.setImage(icon); 
+			refreshChatList();
+			
+		} catch (IOException e) { e.printStackTrace(); }
 
         };
 	
@@ -86,6 +93,20 @@ public class Chatroom {
     	}
     }
 
+    private void refreshChatList(){
+		String url = "file:img/icon2.png";
+		Image icon = new Image(url);
+		ImageView chaticon = new ImageView();
+		chaticon.setFitHeight(50);
+		chaticon.setFitWidth(50);
+		chaticon.setImage(icon);
+		
+		Label chatname = new Label("Global Chat");
+		
+		roomlist.add(chaticon, 0, 1);
+		roomlist.add(chatname, 1, 0);
+    }
+    
 	@FXML
 	 void handleRefreshAction(ActionEvent event) throws IOException{
 		
@@ -135,13 +156,7 @@ public class Chatroom {
 	 }
 	
 	public void loadChatroom(){
-		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
-		String url = "file:img/" + Client.currentUser.avatar;
-		Image icon = new Image(url);		// replace the path with user icon
-		//System.out.println(Client.currentUser.avatar); //
-
-		userIcon.setImage(icon); //
-
+		// for switching between chatrooms
 		
 	}
 	

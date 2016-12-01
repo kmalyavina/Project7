@@ -38,11 +38,11 @@ import javafx.stage.Stage;
 
 public class Client extends Application {
 
-		 private User user;
+		private User user;
 
-		 static ObjectOutputStream toServer = null;
-		 static ObjectInputStream fromServer = null;
-		 static User currentUser;
+		static ObjectOutputStream toServer = null;
+		static ObjectInputStream fromServer = null;
+		static User currentUser;
 
 	    @FXML
 	    private Hyperlink registerLink;
