@@ -61,9 +61,8 @@ public class Chatroom {
     	try {
 			handleRefreshAction(null);
 			time = true;
-		
 			nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
-			String url = "file:bin/img/" + Client.currentUser.avatar;
+			String url = "file:img/" + Client.currentUser.avatar;
 			Image icon = new Image(url);
 			userIcon.setImage(icon); 
 			refreshChatList();
@@ -106,7 +105,7 @@ public class Chatroom {
     }
 
     private void refreshChatList(){
-		String url = "file:img/icon1.png";
+		String url = "file:img/icon2.png";
 		Image icon = new Image(url);
 		ImageView chaticon = new ImageView();
 		chaticon.setFitHeight(50);
@@ -121,7 +120,7 @@ public class Chatroom {
 		
 		int roomnum = 1;
 //		for(User u : Client.fromServer.readObject()) {	// for every user in the server user map...
-//			if(u.status = true){
+//			//if(u.status = true){
 //				if(u.userName != Client.currentUser.userName){
 //					chaticon = new ImageView();
 //					chaticon.setFitHeight(50);
@@ -131,14 +130,15 @@ public class Chatroom {
 //					roomlist.add(chatname, 1, roomnum);
 //					roomnum++;
 //				}
-//			}
+//			//}
 //		}
 		
     }
     
 	@FXML
 	 void handleRefreshAction(ActionEvent event) throws IOException{
-		
+						chatscroll.setVvalue(1.0);
+
 						Client.toServer.writeObject("+REFRESH+");
 
 						try {

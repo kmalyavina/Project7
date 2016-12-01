@@ -49,7 +49,7 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <Label layoutX="18.0" layoutY="100.0" text="&gt; c h a t s " textFill="#868686" />
+            <Label layoutX="18.0" layoutY="96.0" text="&gt; c h a t s " textFill="#868686" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="580.0" prefWidth="679.0" style="-fx-background-color: #353333;">
