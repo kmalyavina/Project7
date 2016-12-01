@@ -20,6 +20,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.IntStream;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -66,10 +67,12 @@ public class Client extends Application {
 	    
 	
 	    protected void initialize() {
-	    /*	new Timer().scheduleAtFixedRate(new TimerTask() {   
+	    	
+	    	/*new Timer().scheduleAtFixedRate(new TimerTask() {   
 			    public void run() {
 			    	try {
 						//handleRefreshAction(null);
+			    		 Chatroom.timeRefresh();
 			    		System.out.println("Refresh Please!");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -78,7 +81,7 @@ public class Client extends Application {
 			        // Here comes your void to refresh the whole application.
 
 			    }
-			}, 2000, 2000);/*/
+			}, 2000, 2000);*/
 	    }
 	    @FXML
 	    private void handleLinkAction(ActionEvent event) throws IOException{
@@ -105,7 +108,7 @@ public class Client extends Application {
 	         }
 	        if(event.getSource() == loginButton){ 
 	          // do login stuff
-	        	System.out.println(username.getText());
+	        	//System.out.println(username.getText());
 	        	
 	        	//toServer.writeBytes(username.getText()+ ' ' + password.getText() +'\n'); 
 				user = new User(username.getText(),"", password.getText(), "");
@@ -152,8 +155,8 @@ public class Client extends Application {
 	        
 	        try {
 				@SuppressWarnings("resource")
-		     //   Socket socket = new Socket("127.0.0.1", 8000);
-		        Socket socket = new Socket("10.145.177.101", 8000);
+		       Socket socket = new Socket("127.0.0.1", 8000);
+		     //   Socket socket = new Socket("10.145.177.101", 8000);
 
 		       fromServer = new ObjectInputStream(socket.getInputStream());
 			       toServer = new ObjectOutputStream(socket.getOutputStream());

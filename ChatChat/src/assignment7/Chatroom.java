@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.IntStream;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -42,10 +43,10 @@ public class Chatroom {
 	//private List<User> members;
 	private List<Message> messages;
 	private Chatroom currentchat;
-	private boolean time = false;
+	private static boolean time = false;
 
-	@FXML	
-	private Button refreshButton;	
+	@FXML
+	static Button refreshButton;	
 	@FXML	
 	private Button sendButton;
 	@FXML	
@@ -60,6 +61,7 @@ public class Chatroom {
     protected void initialize() {
     	try {
 			handleRefreshAction(null);
+			time = true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,6 +78,13 @@ public class Chatroom {
     @FXML
     private ImageView userIcon;
     
+    static void timeRefresh() {
+    	if (time) {
+		 IntStream.range(0, 1).forEach(
+                 i -> Chatroom.refreshButton.fire()
+         );
+    	}
+    }
 
 	@FXML
 	 void handleRefreshAction(ActionEvent event) throws IOException{
@@ -92,10 +101,12 @@ public class Chatroom {
 								if (m.message.equals("+END+")) {break;}
 
 						
-								System.out.println(m.message+" at row:"+c);
+								//System.out.println(m.message+" at row:"+c);
 								String url = "file:img/" + m.sender.avatar;
+								
 								Image img  = new Image(url);
 								ImageView icon = new ImageView(url);		// replace the path with user icon
+								//System.out.println(img.toString());
 								icon.setImage(img);
 								icon.setFitHeight(50);
 								icon.setFitWidth(50);
@@ -127,7 +138,7 @@ public class Chatroom {
 		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
 		String url = "file:img/" + Client.currentUser.avatar;
 		Image icon = new Image(url);		// replace the path with user icon
-		System.out.println(Client.currentUser.avatar); //
+		//System.out.println(Client.currentUser.avatar); //
 
 		userIcon.setImage(icon); //
 
@@ -141,7 +152,7 @@ public class Chatroom {
 		    // Parent root;
 			String incomingMsg = usertext.getText();
 			//chatlog.appendText(incomingMsg);
-			System.out.println(incomingMsg);
+		//	System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
 			Client.toServer.flush();
 

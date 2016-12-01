@@ -71,7 +71,7 @@ public class ServerMain extends Application {
 			//allusers.put(username, new User(username, nickname, password, userIcon, s, friends));
 
 			User auser = new User(username, nickname, password, userIcon, s, friends);
-			System.out.println(auser);
+			//System.out.println(auser);
 			allusers.put(username, auser);
 		}
 			
@@ -91,7 +91,8 @@ public class ServerMain extends Application {
 		
 		buildUsers();
 
-		
+	
+		messages.put("general", new ArrayList<Message>());
 		// Create a scene and place it in the stage 
 		Scene scene = new Scene(new ScrollPane(ta), 450, 200); 
 		primaryStage.setTitle("MultiThreadServer"); // Set the stage title 
@@ -165,7 +166,7 @@ public class ServerMain extends Application {
 						credentials = (User) inputFromClient.readObject();
 						User currentUser = allusers.get(credentials.userName);
 						if (currentUser != null && currentUser.password.equals(credentials.password)) {
-							System.out.println("Success!");
+							//System.out.println("Success!");
 							credentials = currentUser;
 							outputToClient.writeObject(currentUser);
 							logged = true;
@@ -206,13 +207,18 @@ public class ServerMain extends Application {
 					try {	
 						String in = (String) inputFromClient.readObject();
 						if (in.equals("+REFRESH+")) {
-							System.out.println("Refreshing!");
+							//System.out.println("Refreshing!");
 							
 							ArrayList<Message> fullRoom = messages.get(room);
 							Integer c=1;
+							if (fullRoom == null) {
+								outputToClient.writeObject(null);
+
+							} else {
 							for (Message m: (ArrayList<Message>)fullRoom) {
 								outputToClient.writeObject(m);
 								//System.out.println(m.message+" at row:"+c++);
+							}
 							}
 							outputToClient.writeObject(new Message(credentials,"+END+"));
 
@@ -220,14 +226,14 @@ public class ServerMain extends Application {
 						} else{
 						synchronized (messages) {
 							Message msg = new Message(credentials,in);
-							System.out.println(credentials.avatar);
-							System.out.println(credentials.userName + ": "+ in);
+							//System.out.println(credentials.avatar);
+							//System.out.println(credentials.userName + ": "+ in);
 							ta.appendText(credentials.userName + ": "+ in + '\n'); 
 							ArrayList<Message> fullRoom = messages.get(room);
 							if (fullRoom == null) {
 								fullRoom = new ArrayList<Message>();
 							}
-							System.out.println("Adding: "+in);
+						//	System.out.println("Adding: "+in);
 
 							fullRoom.add(msg);
 							messages.put(room, fullRoom);
