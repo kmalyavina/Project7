@@ -24,6 +24,7 @@ import java.util.stream.IntStream;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 //import assignment7.Client.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,7 +67,25 @@ public class Chatroom {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	new Timer().scheduleAtFixedRate(new TimerTask() {   
+    
+	    	 @Override
+	         public void run() {
+	             Platform.runLater(() -> {
+	 				try {
+						handleRefreshAction(null);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
+	             });
+	           
+	    
+	        // Here comes your void to refresh the whole application.
+
+	    }
+	}, 2000, 2000);
         };
 	
 	public void add(Message m){ messages.add(m);}
