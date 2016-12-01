@@ -81,8 +81,7 @@ public class Chatroom {
 	 void handleRefreshAction(ActionEvent event) throws IOException{
 		
 						Client.toServer.writeObject("+REFRESH+");
-						//Client.toServer.flush();
-					
+
 						try {
 							//Object fullRoom =  Client.fromServer.readObject();
 							Integer c = 1;
@@ -91,14 +90,18 @@ public class Chatroom {
 							while (true) {
 								Message m = (Message) Client.fromServer.readObject();
 								if (m.message.equals("+END+")) {break;}
-							//	System.out.println(m.sender.avatar);
-								ImageView icon = new ImageView("file:img/"+m.sender.avatar );		// replace the path with user icon
+
 						
+								System.out.println(m.message+" at row:"+c);
+								String url = "file:img/" + m.sender.avatar;
+								Image img  = new Image(url);
+								ImageView icon = new ImageView(url);		// replace the path with user icon
+								icon.setImage(img);
 								icon.setFitHeight(50);
 								icon.setFitWidth(50);
 								TextArea textmess = new TextArea(m.message);		// get the text contents
 								textmess.setEditable(false);
-								textmess.setMinHeight(50);
+								textmess.setPrefHeight(50);
 								textmess.setMaxWidth(500);
 								textmess.setWrapText(true);
 								
@@ -122,7 +125,7 @@ public class Chatroom {
 	
 	public void loadChatroom(){
 		nameLabel.setText("Hello, " + Client.currentUser.displayName + "!");	
-		String url = "file:" + Client.currentUser.avatar;
+		String url = "file:img/" + Client.currentUser.avatar;
 		Image icon = new Image(url);		// replace the path with user icon
 		System.out.println(Client.currentUser.avatar); //
 
@@ -143,7 +146,6 @@ public class Chatroom {
 			Client.toServer.flush();
 
 			ArrayList<Message> fullRoom;
-
 	
 				handleRefreshAction(null);
 			/*	for(int i = 0; i < 9; i++){

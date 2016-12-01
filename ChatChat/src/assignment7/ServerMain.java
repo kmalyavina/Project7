@@ -166,6 +166,7 @@ public class ServerMain extends Application {
 						User currentUser = allusers.get(credentials.userName);
 						if (currentUser != null && currentUser.password.equals(credentials.password)) {
 							System.out.println("Success!");
+							credentials = currentUser;
 							outputToClient.writeObject(currentUser);
 							logged = true;
 						} else {
@@ -219,6 +220,7 @@ public class ServerMain extends Application {
 						} else{
 						synchronized (messages) {
 							Message msg = new Message(credentials,in);
+							System.out.println(credentials.avatar);
 							System.out.println(credentials.userName + ": "+ in);
 							ta.appendText(credentials.userName + ": "+ in + '\n'); 
 							ArrayList<Message> fullRoom = messages.get(room);
