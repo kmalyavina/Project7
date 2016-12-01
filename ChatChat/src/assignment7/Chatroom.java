@@ -106,7 +106,7 @@ public class Chatroom {
     }
 
     private void refreshChatList(){
-		String url = "file:img/icon2.png";
+		String url = "file:img/icon1.png";
 		Image icon = new Image(url);
 		ImageView chaticon = new ImageView();
 		chaticon.setFitHeight(50);
