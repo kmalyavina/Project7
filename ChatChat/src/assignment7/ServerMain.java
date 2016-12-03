@@ -35,13 +35,13 @@ public class ServerMain extends Application {
 	private Scanner scan;
 	
 	private static Map<String, User> allusers = new HashMap<>();
-	ArrayList<String> userList = new ArrayList<String>();
 	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
 	private static Map<String, ArrayList<Message>> messages = new HashMap<>();
-
+	ServerSocket serverSocket;
 	
 
 	private Map<String, User> buildUsers(){
+		ArrayList<String> userList = new ArrayList<String>();
 		scan = null;
 		
 		try {
@@ -80,7 +80,12 @@ public class ServerMain extends Application {
 		return allusers;
 	}
 	
-	
+	@Override
+	public void stop(){
+	    try {
+			serverSocket.close();
+		} catch (IOException e) {e.printStackTrace();}
+	}
 	
 	// Text area for displaying contents 
 	private TextArea ta = new TextArea(); 
@@ -102,7 +107,7 @@ public class ServerMain extends Application {
 		primaryStage.show(); // Display the stage 
 		new Thread( () -> { 
 			try {  // Create a server socket 
-				ServerSocket serverSocket = new ServerSocket(8000); 
+				serverSocket = new ServerSocket(8000); 
 				ta.appendText("MultiThreadServer started at " 
 						+ new Date() + '\n'); 
 
