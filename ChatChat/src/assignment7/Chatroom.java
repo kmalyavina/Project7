@@ -83,15 +83,13 @@ public class Chatroom {
 
 			Integer c = 1;
 			chatmessages.getChildren().clear();
-			System.out.println("prewhile");
 
 			while (true) {
-				//System.out.println("while");
-
 				User u = (User) Client.fromServer.readObject();
 				//System.out.println(u.userName);
 
 				if (u.userName.equals("+USEREND+")) {break;}
+				
 			} 
 
 			} catch (Exception e) { 

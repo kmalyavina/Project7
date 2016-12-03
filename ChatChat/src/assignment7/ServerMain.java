@@ -166,9 +166,7 @@ public class ServerMain extends Application {
 				User credentials = null;
 
 				while (logged == false) { 
-					//scan = new Scanner(inputFromClient.read);
-					//String username = scan.next();
-					//String password = scan.next();
+			
 					try {
 						credentials = (User) inputFromClient.readObject();
 						User currentUser = allusers.get(credentials.userName);
@@ -188,23 +186,7 @@ public class ServerMain extends Application {
 				
 					
 					outputToClient.flush();
-					// Receive radius from the client 
-					//double radius = inputFromClient.readDouble();
 					
-					//String internal = input;
-					// Compute area
-					//double area = radius * radius * Math.PI; 
-					// Send area back to the client
-					//outputToClient.write(1);
-
-					//outputToClient.flush();
-					//if (!input.equals(lastInput)) {
-					/*	Platform.runLater(() -> { 
-						  	ta.appendText("username from client: " +
-						  			 '\n'); 
-						});*/
-					//}
-					//lastInput = input;
 				}
 				while (true) { 
 					String room = "general";
@@ -213,7 +195,10 @@ public class ServerMain extends Application {
 			
 					try {	
 						String in = (String) inputFromClient.readObject();
-						if (in.equals("+REFRESH+")) {
+						if (in.endsWith("+ROOMSWITCH+")) {
+							//in.endsWith(suffix)
+							
+						} else if (in.equals("+REFRESH+")) {
 							//System.out.println("Refreshing!");
 							
 							ArrayList<Message> fullRoom = messages.get(room);
@@ -229,7 +214,7 @@ public class ServerMain extends Application {
 							}
 							outputToClient.writeObject(new Message(credentials,"+REFEND+"));
 
-
+								
 						} else if (in.equals("+USERLIST+")) {
 							//System.out.println("Refreshing!");
 							
@@ -256,6 +241,9 @@ public class ServerMain extends Application {
 							Message msg = new Message(credentials,in);
 							//System.out.println(credentials.avatar);
 							//System.out.println(credentials.userName + ": "+ in);
+							synchronized (allusers) {
+							allusers.get(credentials.userName).status = true;
+							}
 							ta.appendText(credentials.userName + ": "+ in + '\n'); 
 							ArrayList<Message> fullRoom = messages.get(room);
 							if (fullRoom == null) {

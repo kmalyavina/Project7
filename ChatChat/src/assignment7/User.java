@@ -23,6 +23,7 @@ public class User implements Serializable {
 	protected String password;		// password for logging in (changable)
 	protected String displayName;	// displayed name (changable)
 	protected String avatar;			// icon (changable)
+	protected String room = "general";		// Current Chatroom
 	protected List<String> friends;	// list of friends
 	protected boolean status;		// online/offline
 	
