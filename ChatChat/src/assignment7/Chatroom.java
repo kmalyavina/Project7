@@ -84,12 +84,33 @@ public class Chatroom {
 			Integer c = 1;
 			chatmessages.getChildren().clear();
 
+			String url = "file:img/icon2.png";
+			Image icon = new Image(url);
+			ImageView chaticon = new ImageView();
+			chaticon.setFitHeight(50);
+			chaticon.setFitWidth(50);
+			chaticon.setImage(icon);
+			
+			Label chatname = new Label("Global Chat");
+			chatname.setTextFill(Color.LIGHTGREY);
+			
+			roomlist.add(chaticon, 0, 0);
+			roomlist.add(chatname, 1, 0);
+			int roomnum = 1;
+			
 			while (true) {
 				User u = (User) Client.fromServer.readObject();
-				//System.out.println(u.userName);
 
 				if (u.userName.equals("+USEREND+")) {break;}
-				
+
+				if(u.status == true){
+					if(u.userName != Client.currentUser.userName){			
+						roomlist.add(new ImageView(new Image("file:img/"+u.avatar, 50, 50, true, true)), 0, roomnum);
+						roomlist.add(new Label(u.displayName), 1, roomnum);
+						roomnum++;
+					}
+				}
+
 			} 
 
 			} catch (Exception e) { 
@@ -150,7 +171,7 @@ public class Chatroom {
 		int roomnum = 1;
 //		for(Map.Entry<String, User> u : ServerMain.allusers.entrySet()) {	// for every user in the server user map...
 //			if(u.getValue().status == true){
-//				if(u.getKey() != Client.currentUser.userName){
+//				if(u.username != Client.currentUser.userName){
 //					chaticon = new ImageView("file:img/"+u.getValue().avatar);
 //					chaticon.setFitHeight(50);
 //					chaticon.setFitWidth(50);
