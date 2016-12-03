@@ -70,53 +70,13 @@ public class Chatroom {
 			String url = "file:img/" + Client.currentUser.avatar;
 			Image icon = new Image(url);
 			userIcon.setImage(icon); 
-			refreshChatList();
+			//refreshChatList();
 			
 		} catch (IOException e) { e.printStackTrace(); }
     	
 		
 
-		try {
-			Client.toServer.writeObject("+USERLIST+");
 
-			//Object fullRoom =  Client.fromServer.readObject();
-
-			Integer c = 1;
-			chatmessages.getChildren().clear();
-
-			String url = "file:img/icon2.png";
-			Image icon = new Image(url);
-			ImageView chaticon = new ImageView();
-			chaticon.setFitHeight(50);
-			chaticon.setFitWidth(50);
-			chaticon.setImage(icon);
-			
-			Label chatname = new Label("Global Chat");
-			chatname.setTextFill(Color.LIGHTGREY);
-			
-			roomlist.add(chaticon, 0, 0);
-			roomlist.add(chatname, 1, 0);
-			int roomnum = 1;
-			
-			while (true) {
-				User u = (User) Client.fromServer.readObject();
-
-				if (u.userName.equals("+USEREND+")) {break;}
-
-				if(u.status == true){
-					if(u.userName != Client.currentUser.userName){			
-						roomlist.add(new ImageView(new Image("file:img/"+u.avatar, 50, 50, true, true)), 0, roomnum);
-						roomlist.add(new Label(u.displayName), 1, roomnum);
-						roomnum++;
-					}
-				}
-
-			} 
-
-			} catch (Exception e) { 
-				System.out.println(e);
-			}
-    
 		new Timer().scheduleAtFixedRate(new TimerTask() {   
 		    
 	    	 @Override
@@ -146,14 +106,14 @@ public class Chatroom {
     @FXML
     private ImageView userIcon;
     
-    static void timeRefresh() {
+ /*   static void timeRefresh() {
     	if (time) {
 		 IntStream.range(0, 1).forEach(
                  i -> Chatroom.refreshButton.fire()
          );
     	}
     }
-
+*/
     private void refreshChatList(){
 		String url = "file:img/icon2.png";
 		Image icon = new Image(url);
@@ -187,6 +147,46 @@ public class Chatroom {
     
 	@FXML
 	 void handleRefreshAction(ActionEvent event) throws IOException{
+		try {
+			Client.toServer.writeObject("+USERLIST+");
+
+			//Object fullRoom =  Client.fromServer.readObject();
+
+			roomlist.getChildren().clear();
+			
+			String url = "file:img/icon2.png";
+			Image icon = new Image(url);
+			ImageView chaticon = new ImageView();
+			chaticon.setFitHeight(50);
+			chaticon.setFitWidth(50);
+			chaticon.setImage(icon);
+			
+			Label chatname = new Label("Global Chat");
+			chatname.setTextFill(Color.LIGHTGREY);
+			//chatname.getChil
+			roomlist.add(chaticon, 0, 0);
+			roomlist.add(chatname, 1, 0);
+			int roomnum = 1;
+			
+			while (true) {
+				User u = (User) Client.fromServer.readObject();
+
+				if (u.userName.equals("+USEREND+")) {break;}
+				//System.out.println(u.status);
+				if(u.status == true){
+					if(u.userName != Client.currentUser.userName){			
+						roomlist.add(new ImageView(new Image("file:img/"+u.avatar, 50, 50, true, true)), 0, roomnum);
+						roomlist.add(new Label(u.displayName), 1, roomnum);
+						roomnum++;
+					}
+				}
+
+			} 
+
+			} catch (Exception e) { 
+				System.out.println(e);
+			}
+    
 						chatscroll.setVvalue(1.0);
 
 						Client.toServer.writeObject("+REFRESH+");

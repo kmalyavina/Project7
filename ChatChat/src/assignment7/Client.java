@@ -211,7 +211,7 @@ public class Client extends Application {
 	        
 	        try {
 				@SuppressWarnings("resource")
-		       Socket socket = new Socket("127.0.0.1", 8000);
+		       Socket socket = new Socket("10.146.209.60", 8000);
 		     //   Socket socket = new Socket("10.145.177.101", 8000);
 
 		       fromServer = new ObjectInputStream(socket.getInputStream());

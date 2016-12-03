@@ -174,6 +174,8 @@ public class ServerMain extends Application {
 							//System.out.println("Success!");
 							credentials = currentUser;
 							outputToClient.writeObject(currentUser);
+							allusers.get(credentials.userName).status = true;
+
 							logged = true;
 						} else {
 							outputToClient.writeObject(currentUser);
@@ -189,7 +191,7 @@ public class ServerMain extends Application {
 					
 				}
 				while (true) { 
-					String room = "general";
+					String room = allusers.get(credentials.userName).room;
 			
 
 			
@@ -197,6 +199,8 @@ public class ServerMain extends Application {
 						String in = (String) inputFromClient.readObject();
 						if (in.endsWith("+ROOMSWITCH+")) {
 							//in.endsWith(suffix)
+							String[] bits = in.split("+");
+							allusers.get(credentials.userName).room = bits[0];
 							
 						} else if (in.equals("+REFRESH+")) {
 							//System.out.println("Refreshing!");
@@ -229,6 +233,8 @@ public class ServerMain extends Application {
 							//String k;
 							//User v;
 							for (Entry<String, User> u: allusers.entrySet()) {
+								//System.out.println(u.getValue().status);
+
 								outputToClient.writeObject(u.getValue());
 								//System.out.println(m.message+" at row:"+c++);
 							}
@@ -242,7 +248,7 @@ public class ServerMain extends Application {
 							//System.out.println(credentials.avatar);
 							//System.out.println(credentials.userName + ": "+ in);
 							synchronized (allusers) {
-							allusers.get(credentials.userName).status = true;
+								allusers.get(credentials.userName).status = true;
 							}
 							ta.appendText(credentials.userName + ": "+ in + '\n'); 
 							ArrayList<Message> fullRoom = messages.get(room);
