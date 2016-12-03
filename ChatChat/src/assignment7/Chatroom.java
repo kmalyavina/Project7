@@ -16,6 +16,7 @@ package assignment7;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.IntStream;
@@ -33,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 
 public class Chatroom {
@@ -119,18 +121,18 @@ public class Chatroom {
 		roomlist.add(chatname, 1, 0);//
 		
 		int roomnum = 1;
-//		for(User u : Client.fromServer.readObject()) {	// for every user in the server user map...
-//			//if(u.status = true){
-//				if(u.userName != Client.currentUser.userName){
+//		for(Map.Entry<String, User> u : ServerMain.allusers.entrySet()) {	// for every user in the server user map...
+//			if(u.getValue().status == true){
+//				if(u.getKey() != Client.currentUser.userName){
 //					chaticon = new ImageView();
 //					chaticon.setFitHeight(50);
 //					chaticon.setFitWidth(50);
-//					chatname.setText(u.userName);
+//					chatname.setText(u.getValue().displayName);
 //					roomlist.add(chaticon, 0, roomnum);
 //					roomlist.add(chatname, 1, roomnum);
 //					roomnum++;
 //				}
-//			//}
+//			}
 //		}
 		
     }
@@ -145,6 +147,7 @@ public class Chatroom {
 							//Object fullRoom =  Client.fromServer.readObject();
 							Integer c = 1;
 							chatmessages.getChildren().clear();
+							GridPane.setVgrow(chatmessages, Priority.ALWAYS);
 
 							while (true) {
 								Message m = (Message) Client.fromServer.readObject();
@@ -162,10 +165,10 @@ public class Chatroom {
 								icon.setFitWidth(50);
 								TextArea textmess = new TextArea(m.message);		// get the text contents
 								textmess.setEditable(false);
-								textmess.setPrefHeight(50);
+								textmess.setPrefHeight(50);//
 								textmess.setMaxWidth(500);
 								textmess.setWrapText(true);
-								
+								textmess.setMaxHeight(500);
 								chatmessages.add(icon, 0, c);
 								chatmessages.add(textmess, 1, c);
 								
@@ -195,6 +198,10 @@ public class Chatroom {
 			// Stage stage; 
 		    // Parent root;
 			String incomingMsg = usertext.getText();
+			
+			if(incomingMsg != ""){
+				
+			
 			//chatlog.appendText(incomingMsg);
 		//	System.out.println(incomingMsg);
 			Client.toServer.writeObject(incomingMsg);
@@ -202,25 +209,11 @@ public class Chatroom {
 
 			ArrayList<Message> fullRoom;
 	
-				handleRefreshAction(null);
-			/*	for(int i = 0; i < 9; i++){
-					ImageView icon = new ImageView("file:img/" + i + ".png");		// replace the path with user icon
-					icon.setFitHeight(50);
-					icon.setFitWidth(50);
-					TextArea textmess = new TextArea("message #"+ i + "-------------------");		// get the text contents
-					textmess.setEditable(false);
-					textmess.setMinHeight(50);
-					textmess.setMaxWidth(500);
-					textmess.setWrapText(true);
-					
-					chatmessages.add(icon, 0, i+1);
-					chatmessages.add(textmess, 1, i+1);
-					
-				}*/
-
+			handleRefreshAction(null);
 			Client.toServer.flush();
-			//usertext.setText("");
-			//String pass = password.getText();
+			usertext.setText("");
+			
+			}
 	 }
 	@FXML
 	private void displayMessages(ArrayList<Message> messages){ 								// used when switching between chatrooms

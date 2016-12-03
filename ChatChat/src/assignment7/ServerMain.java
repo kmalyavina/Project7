@@ -33,13 +33,13 @@ public class ServerMain extends Application {
 	private Scanner scan;
 	
 	private static Map<String, User> allusers = new HashMap<>();
-	ArrayList<String> userList = new ArrayList<String>();
 	ArrayList<Chatroom> allchats = new ArrayList<Chatroom>();
 	private static Map<String, ArrayList<Message>> messages = new HashMap<>();
 
 	
 
 	private Map<String, User> buildUsers(){
+		ArrayList<String> userList = new ArrayList<String>();
 		scan = null;
 		
 		try {

@@ -90,6 +90,7 @@ public class Client extends Application {
 			    }
 			}, 2000, 2000);*/
 	    }
+	   
 	    @FXML
 	    private void handleLinkAction(ActionEvent event) throws IOException{
 	        Stage stage = null; 
@@ -140,13 +141,14 @@ public class Client extends Application {
 	        	System.out.println(fileName);
 	        	
 	        	user = new User(username.getText(), nickname.getText(), password.getText(), fileName);
+	        	System.out.println(user.toString());
 	        	
-	        	toServer.writeObject(user);
-	        	toServer.flush(); 
-	        	
-				 try {
-					currentUser  = (User) fromServer.readObject();
-				} catch (ClassNotFoundException e) { e.printStackTrace(); }
+//	        	toServer.writeObject(user);
+//	        	toServer.flush(); 
+//	        	
+//				 try {
+//					currentUser  = (User) fromServer.readObject();
+//				} catch (ClassNotFoundException e) { e.printStackTrace(); }
 				 
 	        	Stage stage = (Stage) registerButton.getScene().getWindow();
 		        Parent root = FXMLLoader.load(getClass().getResource("CRoom.fxml"));			        
@@ -189,12 +191,12 @@ public class Client extends Application {
 	    
 		public static void main(String[] args) { launch(args); }
 		
-		public static void note() {
+		public static void note() {//
 			Client.toServer.notify();
 		}
 		@Override
 		public void start(Stage primaryStage) throws Exception{
-			primaryStage.setTitle("Chat.Chat");
+			primaryStage.setTitle("Chat.Chat");//
 	        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 	    	Scene scene = new Scene(root);			 
 	        primaryStage.setScene(scene);
