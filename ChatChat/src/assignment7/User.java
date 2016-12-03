@@ -25,7 +25,7 @@ public class User implements Serializable {
 	protected String avatar;			// icon (changable)
 	protected String room = "general";		// Current Chatroom
 	protected List<String> friends;	// list of friends
-	protected boolean status;		// online/offline
+	protected boolean status = true;		// online/offline
 	
 	// constructor when have all info
 	public User(String name, String nickname, String pass, String img, Boolean s, ArrayList<String> fl){

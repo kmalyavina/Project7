@@ -153,7 +153,8 @@ public class Chatroom {
 			//Object fullRoom =  Client.fromServer.readObject();
 
 			roomlist.getChildren().clear();
-			
+			GridPane.setVgrow(roomlist, Priority.ALWAYS);
+
 			String url = "file:img/icon2.png";
 			Image icon = new Image(url);
 			ImageView chaticon = new ImageView();
@@ -162,7 +163,7 @@ public class Chatroom {
 			chaticon.setImage(icon);
 			
 			Label chatname = new Label("Global Chat");
-			chatname.setTextFill(Color.LIGHTGREY);
+			//chatname.setTextFill(Color.LIGHTGREY);
 			//chatname.getChil
 			roomlist.add(chaticon, 0, 0);
 			roomlist.add(chatname, 1, 0);
@@ -173,13 +174,13 @@ public class Chatroom {
 
 				if (u.userName.equals("+USEREND+")) {break;}
 				//System.out.println(u.status);
-				if(u.status == true){
+				//if(u.status == true){
 					if(u.userName != Client.currentUser.userName){			
 						roomlist.add(new ImageView(new Image("file:img/"+u.avatar, 50, 50, true, true)), 0, roomnum);
 						roomlist.add(new Label(u.displayName), 1, roomnum);
 						roomnum++;
 					}
-				}
+			//s	}
 
 			} 
 
