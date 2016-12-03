@@ -91,6 +91,12 @@ public class Client extends Application {
 			}, 2000, 2000);*/
 	    }
 	   
+		@Override
+		public void stop(){
+		    		// mark the user as offline
+					// notify other users to update their chat list
+		}
+		
 	    @FXML
 	    private void handleLinkAction(ActionEvent event) throws IOException{
 	        Stage stage = null; 
