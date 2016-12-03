@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.function.BiConsumer;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -220,7 +222,28 @@ public class ServerMain extends Application {
 								//System.out.println(m.message+" at row:"+c++);
 							}
 							}
-							outputToClient.writeObject(new Message(credentials,"+END+"));
+							outputToClient.writeObject(new Message(credentials,"+REFEND+"));
+
+
+						} else if (in.equals("+USERLIST+")) {
+							//System.out.println("Refreshing!");
+							
+							//ArrayList<Message> fullRoom = messages.get(room);
+							Integer c=1;
+							//outputToClient.writeObject(allusers);
+
+							if (allusers == null) {
+								outputToClient.writeObject(null);
+
+							} else {
+							//String k;
+							//User v;
+							for (Entry<String, User> u: allusers.entrySet()) {
+								outputToClient.writeObject(u.getValue());
+								//System.out.println(m.message+" at row:"+c++);
+							}
+							}
+							outputToClient.writeObject(new User("+USEREND+","","",""));
 
 
 						} else{

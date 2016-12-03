@@ -16,6 +16,7 @@ package assignment7;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.IntStream;
@@ -41,6 +42,9 @@ public class Chatroom {
 	private List<Message> messages;
 	private Chatroom currentchat;
 	private static boolean time = false;
+	private static boolean init = false;
+
+	Map<String, User> allusers;
 
 	@FXML
 	static Button refreshButton;	
@@ -68,9 +72,33 @@ public class Chatroom {
 			refreshChatList();
 			
 		} catch (IOException e) { e.printStackTrace(); }
+    	
+		
 
-    	new Timer().scheduleAtFixedRate(new TimerTask() {   
+		try {
+			Client.toServer.writeObject("+USERLIST+");
+
+			//Object fullRoom =  Client.fromServer.readObject();
+
+			Integer c = 1;
+			chatmessages.getChildren().clear();
+			System.out.println("prewhile");
+
+			while (true) {
+				//System.out.println("while");
+
+				User u = (User) Client.fromServer.readObject();
+				//System.out.println(u.userName);
+
+				if (u.userName.equals("+USEREND+")) {break;}
+			} 
+
+			} catch (Exception e) { 
+				System.out.println(e);
+			}
     
+		new Timer().scheduleAtFixedRate(new TimerTask() {   
+		    
 	    	 @Override
 	         public void run() {
 	             Platform.runLater(() -> {
@@ -79,13 +107,15 @@ public class Chatroom {
 					} catch (IOException e) { e.printStackTrace();}
 
 	             });
-	           
-	    
-	        // Here comes your void to refresh the whole application.
 
 	    }
-	}, 2000, 2000);
-        };
+   	}, 2000, 2000);
+    
+
+
+    	
+		
+        }
 	
 	public void add(Message m){ messages.add(m);}
 	
@@ -148,7 +178,7 @@ public class Chatroom {
 
 							while (true) {
 								Message m = (Message) Client.fromServer.readObject();
-								if (m.message.equals("+END+")) {break;}
+								if (m.message.equals("+REFEND+")) {break;}
 
 						
 								//System.out.println(m.message+" at row:"+c);
