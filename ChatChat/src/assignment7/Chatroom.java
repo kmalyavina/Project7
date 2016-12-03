@@ -124,7 +124,7 @@ public class Chatroom {
 //		for(Map.Entry<String, User> u : ServerMain.allusers.entrySet()) {	// for every user in the server user map...
 //			if(u.getValue().status == true){
 //				if(u.getKey() != Client.currentUser.userName){
-//					chaticon = new ImageView();
+//					chaticon = new ImageView("file:img/"+u.getValue().avatar);
 //					chaticon.setFitHeight(50);
 //					chaticon.setFitWidth(50);
 //					chatname.setText(u.getValue().displayName);
